@@ -70,12 +70,12 @@ angular.module('app.routes', [])
     }
   })
   
-  .state('menu.volunteer', {
-    url: '/volunteer',
+  .state('menu.vispdat', {
+    url: '/vispdat',
     views: {
       'side-menu21': {
-        templateUrl: 'pages/volunteer.html',
-        controller: 'volunteerCtrl'
+        templateUrl: 'pages/vispdat.html',
+        controller: 'vispdatCtrl'
       }
     }
   })
@@ -120,6 +120,16 @@ angular.module('app.routes', [])
     }
   })
   
+    .state('menu.login', {
+    url: '/login',
+    views: {
+      'side-menu21': {
+        templateUrl: 'pages/login.html',
+        controller: 'loginCtrl'
+      }
+    }
+  })
+  
   
 
   .state('menu', {
@@ -138,7 +148,6 @@ angular.module('app.routes', [])
   
  
 $urlRouterProvider.otherwise('/kauhale/home')
-
   
 
 });
