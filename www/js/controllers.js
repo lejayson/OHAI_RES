@@ -341,7 +341,6 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 	 
 		  }); 
 	  }
-	 
 	  function addInfoWindow(marker, record) {
 	      //var contentString = "<button ng-click='toggleList()' ng-class='listButton' class='r-listview'>VIEW LIST <i class='ion-ios-list-outline'></i></button>"
 		  var contentString = "<span>"+record.name+"<div></span><p>Date Refered:"+record.referdate+"</p><p>Gender: "+record.gender+"</p><p><button ng-click='toggleList()' onclick='gotoLocation("+record.lat+","+record.lng+")' class='listmapbutton'>View Details</button></p></div>"
@@ -447,6 +446,9 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
       }
       else {
         showList();
+        if ($scope.detailmover === "detailcontainer-active") {
+          hideDetails();
+        }
       }
     }
     hideList = function () {
@@ -454,6 +456,25 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
     }
     showList = function () {
       $scope.rtmover="resource-toolbar-active";
+    }
+    
+    $scope.detailmover="detailcontainer";
+    $scope.toggleDetails = function () {
+      if ($scope.detailmover === "detailcontainer-active") {
+        hideDetails();
+      }
+      else {
+        showDetails();
+        if ($scope.rtmover === "resource-toolbar-active") {
+          hideList();
+        }
+      }
+    }
+    hideDetails = function () {
+      $scope.detailmover="detailcontainer";
+    }
+    showDetails = function () {
+      $scope.detailmover="detailcontainer-active";
     }
     
     myLocation = function(){

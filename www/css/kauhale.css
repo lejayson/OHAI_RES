@@ -1431,14 +1431,91 @@ i.resourceicons {
 
 
 
+.input-label {
+    font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
+    white-space: initial;
+    width: 100%;
+    max-width: 100%;
+    font-size: .9em;
+}
 
 
 
-
-
+.scroll {
+    height: auto;
+}
 
 
 
 .vispdatform {
+    width:100%; 
+    height:100%;
+}
+
+.slider {
     height: 100%;
+}
+
+.vispdateheaderbg {
+    height: 60px;
+    background-color: #00adb5;
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    top: 0;
+}
+
+.has-vispdatheader {
+    top: 62px;
+}
+
+.vispdat-header {
+    padding-left: 16px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #00adb5;
+    color: #eee;
+    font-size: 1.2em;
+    z-index: 20;
+}
+
+.vispdatflow {
+}
+
+.vispdatinput {
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 16px;
+}
+
+.vispdat-toggle {
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.selectlabel {
+    width: 70%;
+}
+
+.slider-pager .slider-pager-page {
+    padding-top: 7px;
+}
+
+.slider-pager {
+    background-color: #f8f8f8;
+    bottom: 0px;
+    height:30px;
+}
+
+.resultscore {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    padding: 0px 16px 0px 0px;
+    font-size: 14px;
 }
