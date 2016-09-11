@@ -1,46 +1,558 @@
 <ion-view title="VI SPDAT" id="page5">
-    <ion-content padding="true" class="has-header" scroll="false">
-    
-     
-         <div class=""></div>
+    <ion-content padding="false" class="has-header" scroll="false">
+        
+        <div class="vispdateheaderbg"></div>
         
         <ion-slide-box on-slide-changed="slideHasChanged($index)">
-  <ion-slide class="fullheight">
-    <div class="box blue vispdatform">
-      
-      
-         <div class="list">
-              <label class="item item-input item-stacked-label">
-                <span class="input-label">First Name</span>
-                <input type="text" placeholder="John">
-              </label>
-              <label class="item item-input item-stacked-label">
-                <span class="input-label">Last Name</span>
-                <input type="text" placeholder="Suhr">
-              </label>
-              <label class="item item-input item-stacked-label">
-                <span class="input-label">Nickname</span>
-                <input type="text" placeholder="john@suhr.com">
-              </label>
-              <label class="item item-input item-stacked-label">
-                <span class="input-label">Date of Birth</span>
-                <input type="date" placeholder="john@suhr.com">
-              </label>
-              <label class="item item-input item-stacked-label">
-                <span class="input-label">Age</span>
-                <input type="number" placeholder="21">
-              </label>
-            </div>
-      
-      
-      </div>
-  </ion-slide>
+          <ion-slide>
+              
+            <div class="vispdat-header has-header">Basic Information</div>
+            <div class="has-header has-tabs-top box blue vispdatform">
+                    <ion-content class="has-vispdatheader" scroll="true">
+                 <div class="list">
+                      <label class="item item-input item-stacked-label vispdatinput">
+                        <span class="input-label">First Name</span>
+                        <input type="text" placeholder="John">
+                      </label>
+                      <label class="item item-input item-stacked-label vispdatinput">
+                        <span class="input-label">Last Name</span>
+                        <input type="text" placeholder="Suhr">
+                      </label>
+                      <label class="item item-input item-stacked-label vispdatinput">
+                        <span class="input-label">Nickname</span>
+                        <input type="text" placeholder="john@suhr.com">
+                      </label>
+                      <label class="item item-input item-stacked-label vispdatinput">
+                        <span class="input-label">Date of Birth</span>
+                        <input type="date" placeholder="john@suhr.com">
+                      </label>
+                      <label class="item item-input item-stacked-label vispdatinput">
+                        <span class="input-label">Age</span>
+                        <input type="number" placeholder="21">
+                      </label>
+                     <label class="item item-input item-stacked-label vispdatinput">
+                        <span class="input-label">Social Security Number</span>
+                        <input type="number" placeholder="123-45-6789">
+                      </label>
+                     <label class="item item-input item-stacked-label vispdatinput">
+                        <span class="input-label">Social Security Number</span>
+                        <input type="number" placeholder="123-45-6789">
+                      </label>
+                     <label class="item item-input item-stacked-label vispdatinput">
+                        <span class="input-label">Social Security Number</span>
+                        <input type="number" placeholder="123-45-6789">
+                      </label>
+                     
+                     <ul class="list vispdat-toggle"><li class="item item-toggle">
+                         Consent to Participate
+                         <label class="toggle toggle-assertive">
+                           <input type="checkbox">
+                           <div class="track">
+                             <div class="handle"></div>
+                           </div>
+                         </label>
+                      </li></ul>
+                     
+                     <br><br>
+
+                    </div>
+                </ion-content>
+              </div>
+              
+          </ion-slide>
+            
+            
+            
   <ion-slide>
-    <div class="box yellow"><h1>YELLOW</h1></div>
+      
+     <div class="vispdat-header has-header">History of Housing and Homelessness</div>
+            <div class="has-header has-tabs-top box blue vispdatform">
+                    <ion-content class="has-vispdatheader" scroll="true">
+                 <div class="list">
+                     
+                      <label class="item item-input item-select">
+                        <div class="input-label selectlabel">
+                          Where do you sleep <br> most frequently?
+                        </div>
+                        <select>
+                          <option selected>Shelters</option>
+                          <option>Transitional Housing</option>
+                          <option>Safe Haven</option>
+                            <option>Outdoors</option>
+                            <option>Other</option>
+                            <option>Refused</option>
+                        </select>
+                      </label>
+
+                      <label class="item item-input item-stacked-label vispdatinput">
+                        <span class="input-label">How long has it been since you lived in permanent stable housing?</span>
+                        <input type="text" placeholder="5 Months">
+                      </label>
+                      <label class="item item-input item-stacked-label vispdatinput">
+                        <span class="input-label">In the last three years, how many times have you been homeless?</span>
+                        <input type="text" placeholder="john@suhr.com">
+                      </label>
+                     
+                     <br><br>
+
+                    </div>
+                </ion-content>
+              </div>  
   </ion-slide>
+            
+            
   <ion-slide>
-    <div class="box pink"><h1>PINK</h1></div>
+      
+     <div class="vispdat-header has-header">Risks</div>
+            <div class="has-header has-tabs-top box blue vispdatform">
+                    <ion-content class="has-vispdatheader" scroll="true">
+                 <div class="list">
+                     
+                     <label class="item item-input item-stacked-label vispdatinput">
+                        <span class="input-label">In the past six months, how many times have you...</span>
+                      </label>
+                     
+                      <label class="item item-input item-stacked-label vispdatinput">
+                        <span class="input-label">Received health care at an emergency department/room?</span>
+                        <input type="number" placeholder="6">
+                      </label>
+
+                      <label class="item item-input item-stacked-label vispdatinput">
+                        <span class="input-label">Taken an ambulance to the hospital?</span>
+                        <input type="number" placeholder="6">
+                      </label>
+                     
+                     <label class="item item-input item-stacked-label vispdatinput">
+                        <span class="input-label">Been hospitalized as an inpatient?</span>
+                        <input type="number" placeholder="6">
+                      </label>
+                     
+                     <label class="item item-input item-stacked-label vispdatinput">
+                        <span class="input-label">Used a crisis service, including sexual assault crisis, mental health crisis, family/intimate violence, distress centers and suicide prevention hotlines?</span>
+                        <input type="number" placeholder="6">
+                      </label>
+                     
+                     <label class="item item-input item-stacked-label vispdatinput">
+                        <span class="input-label">Talked to police because you witnessed a crime, were the victim of a crime, or the alleged perpetrator of a crime or because the police told you that you must move along?</span>
+                        <input type="number" placeholder="6">
+                      </label>
+                     
+                     <label class="item item-input item-stacked-label vispdatinput">
+                        <span class="input-label">Stayed one or more nights in a holding cell, jail or prison, whether that was a short-term stay like the drunk tank, a longer stay for a more serious offence, or anything in between?</span>
+                        <input type="number" placeholder="6">
+                      </label>
+                     
+                       <label class="item item-input item-select">
+                        <div class="input-label selectlabel">
+                          Have you been attacked or beaten up since you’ve become homeless?
+                        </div>
+                        <select>
+                          <option value="" disabled selected>Select</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                          <option value="refused">Refused</option>
+                        </select>
+                      </label>
+                     
+                     <label class="item item-input item-select">
+                        <div class="input-label selectlabel">
+                         Have you threatened to or tried to harm yourself or anyone else in the last year?
+                        </div>
+                        <select>
+                          <option value="" disabled selected>Select</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                          <option value="refused">Refused</option>
+                        </select>
+                      </label>
+                     
+                     <label class="item item-input item-select">
+                        <div class="input-label selectlabel">
+                         Do you have any legal stuff going on right now that may result in you being locked up, having to pay fines, or that make it more difficult to rent a place to live?
+                        </div>
+                        <select>
+                          <option value="" disabled selected>Select</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                          <option value="refused">Refused</option>
+                        </select>
+                      </label>
+                     
+                     <label class="item item-input item-select">
+                        <div class="input-label selectlabel">
+                         Does anybody force or trick you to do things that you do not want to do?
+                        </div>
+                        <select>
+                          <option value="" disabled selected>Select</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                          <option value="refused">Refused</option>
+                        </select>
+                      </label>
+                     
+                     <label class="item item-input item-select">
+                        <div class="input-label selectlabel">
+                         Do you ever do things that may be considered to be risky like exchange sex for money, run drugs for someone, have unprotected sex with someone you don’t know, share a needle, or anything like that?
+                        </div>
+                        <select>
+                          <option value="" disabled selected>Select</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                          <option value="refused">Refused</option>
+                        </select>
+                      </label>
+                     
+                     <br><br>
+
+                    </div>
+                </ion-content>
+              </div>  
   </ion-slide>
+            
+<ion-slide>
+      
+     <div class="vispdat-header has-header">Socialization & Daily Functioning</div>
+            <div class="has-header has-tabs-top box blue vispdatform">
+                    <ion-content class="has-vispdatheader" scroll="true">
+                 <div class="list">
+                     
+                       <label class="item item-input item-select">
+                        <div class="input-label selectlabel">
+                          Is there any person, past landlord, business, bookie, dealer, or government group like the IRS that thinks you owe them money?
+                        </div>
+                        <select>
+                          <option value="" disabled selected>Select</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                          <option value="refused">Refused</option>
+                        </select>
+                      </label>
+                     
+                     <label class="item item-input item-select">
+                        <div class="input-label selectlabel">
+                         Do you get any money from the government, a pension, an inheritance, working under the table, a regular job, or anything like that?
+                        </div>
+                        <select>
+                          <option value="" disabled selected>Select</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                          <option value="refused">Refused</option>
+                        </select>
+                      </label>
+                     
+                     <label class="item item-input item-select">
+                        <div class="input-label selectlabel">
+                        Do you have planned activities, other than just surviving, that make you feel happy and fulfilled?
+                        </div>
+                        <select>
+                          <option value="" disabled selected>Select</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                          <option value="refused">Refused</option>
+                        </select>
+                      </label>
+                     
+                     <label class="item item-input item-select">
+                        <div class="input-label selectlabel">
+                         Are you currently able to take care of basic needs like bathing, changing clothes, using a restroom, getting food and clean water and other things like that?
+                        </div>
+                        <select>
+                          <option value="" disabled selected>Select</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                          <option value="refused">Refused</option>
+                        </select>
+                      </label>
+                     
+                     <label class="item item-input item-select">
+                        <div class="input-label selectlabel">
+                         Is your current homelessness in any way caused by a relationship that broke down, an unhealthy or abusive relationship, or because family or friends caused you to become evicted?
+                        </div>
+                        <select>
+                          <option value="" disabled selected>Select</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                          <option value="refused">Refused</option>
+                        </select>
+                      </label>
+                     
+                     <br><br>
+
+                    </div>
+                </ion-content>
+              </div>  
+  </ion-slide>
+
+            
+<ion-slide>
+      
+     <div class="vispdat-header has-header">Wellness</div>
+            <div class="has-header has-tabs-top box blue vispdatform">
+                    <ion-content class="has-vispdatheader" scroll="true">
+                 <div class="list">
+                     
+                       <label class="item item-input item-select">
+                        <div class="input-label selectlabel">
+                          Have you ever had to leave an apartment, shelter program, or other place you were staying because of your physical health?
+                        </div>
+                        <select>
+                          <option value="" disabled selected>Select</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                          <option value="refused">Refused</option>
+                        </select>
+                      </label>
+                     
+                     <label class="item item-input item-select">
+                        <div class="input-label selectlabel">
+                         Do you have any chronic health issues with your liver, kidneys,stomach, lungs or heart?
+                        </div>
+                        <select>
+                          <option value="" disabled selected>Select</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                          <option value="refused">Refused</option>
+                        </select>
+                      </label>
+                     
+                     <label class="item item-input item-select">
+                        <div class="input-label selectlabel">
+                        If there was space available in a program that specifically assists people that live with HIV or AIDS, would that be of interest to you?
+                        </div>
+                        <select>
+                          <option value="" disabled selected>Select</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                          <option value="refused">Refused</option>
+                        </select>
+                      </label>
+                     
+                     <label class="item item-input item-select">
+                        <div class="input-label selectlabel">
+                         Do you have any physical disabilities that would limit the type of housing you could access, or would make it hard to live independently because you’d need help?
+                        </div>
+                        <select>
+                          <option value="" disabled selected>Select</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                          <option value="refused">Refused</option>
+                        </select>
+                      </label>
+                     
+                     <label class="item item-input item-select">
+                        <div class="input-label selectlabel">
+                         When you are sick or not feeling well, do you avoid getting help?
+                        </div>
+                        <select>
+                          <option value="" disabled selected>Select</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                          <option value="refused">Refused</option>
+                        </select>
+                      </label>
+                     
+                        <label class="item item-input item-select">
+                        <div class="input-label selectlabel">
+                        FOR FEMALE RESPONDENTS ONLY: Are you currently pregnant?
+                        </div>
+                        <select>
+                          <option value="" disabled selected>Select</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                          <option value="refused">Refused</option>
+                        </select>
+                      </label>
+                     
+                        <label class="item item-input item-select">
+                        <div class="input-label selectlabel">
+                         Has your drinking or drug use led you to being kicked out of an apartment or program where you were staying in the past?
+                        </div>
+                        <select>
+                          <option value="" disabled selected>Select</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                          <option value="refused">Refused</option>
+                        </select>
+                      </label>
+                     
+                        <label class="item item-input item-select">
+                        <div class="input-label selectlabel">
+                         Will drinking or drug use make it difficult for you to stay housed or afford your housing?
+                        </div>
+                        <select>
+                          <option value="" disabled selected>Select</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                          <option value="refused">Refused</option>
+                        </select>
+                      </label>
+                     
+                        <label class="item item-input item-select">
+                        <div class="input-label">
+                         Have you ever had trouble maintaining your housing, or been kicked out of an apartment, shelter program or other place you were staying, because of:
+                        </div>
+                      </label>
+                     
+                                          <label class="item item-input item-select">
+                        <div class="input-label selectlabel">
+                         A mental health issue or concern?
+                        </div>
+                        <select>
+                          <option value="" disabled selected>Select</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                          <option value="refused">Refused</option>
+                        </select>
+                      </label>
+                     
+                       <label class="item item-input item-select">
+                        <div class="input-label selectlabel">
+                         A past head injury?
+                        </div>
+                        <select>
+                          <option value="" disabled selected>Select</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                          <option value="refused">Refused</option>
+                        </select>
+                      </label>
+                     
+                     <label class="item item-input item-select">
+                        <div class="input-label selectlabel">
+                         A learning disability, developmental disability, or other impairment?
+                        </div>
+                        <select>
+                          <option value="" disabled selected>Select</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                          <option value="refused">Refused</option>
+                        </select>
+                      </label>
+                     
+                     <label class="item item-input item-select">
+                        <div class="input-label selectlabel">
+                         Do you have any mental health or brain issues that would make it hard for you to live independently because you’d need help?
+                        </div>
+                        <select>
+                          <option value="" disabled selected>Select</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                          <option value="refused">Refused</option>
+                        </select>
+                      </label>
+                     
+                    <label class="item item-input item-select">
+                        <div class="input-label selectlabel">
+                         Are there any medications that a doctor said you should be taking that, for whatever reason, you are not taking?
+                        </div>
+                        <select>
+                          <option value="" disabled selected>Select</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                          <option value="refused">Refused</option>
+                        </select>
+                      </label>
+                     
+                       <label class="item item-input item-select">
+                        <div class="input-label selectlabel">
+                         Are there any medications like painkillers that you don’t take the way the doctor prescribed or where you sell the medication?
+                        </div>
+                        <select>
+                          <option value="" disabled selected>Select</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                          <option value="refused">Refused</option>
+                        </select>
+                      </label>
+                     
+                       <label class="item item-input item-select">
+                        <div class="input-label selectlabel">
+                         YES OR NO: Has your current period of homelessness been caused by an experience of emotional, physical, psychological, sexual, or other type of abuse, or by any other trauma you have experienced?
+                        </div>
+                        <select>
+                          <option value="" disabled selected>Select</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                          <option value="refused">Refused</option>
+                        </select>
+                      </label>
+                     
+                     <br><br>
+
+                    </div>
+                </ion-content>
+              </div>  
+  </ion-slide>
+            
+            
+            
+ <ion-slide>
+      
+     <div class="vispdat-header has-header">Scoring Summary</div>
+            <div class="has-header has-tabs-top box blue vispdatform">
+                    <ion-content class="has-vispdatheader" scroll="true">
+                 <div class="list">
+                     
+                      <label class="item item-input">
+                        <div class="input-label selectlabel">
+                          PRE-SURVEY
+                        </div>
+                          <div class="resultscore">NUMBER / 1</div>
+                      </label>
+
+                      <label class="item item-input">
+                        <div class="input-label selectlabel">
+                          History of Housing & Homelessness
+                        </div>
+                         <div class="resultscore">NUMBER / 2</div>
+                      </label>
+                     
+                     <label class="item item-input">
+                        <div class="input-label selectlabel">
+                          <div class="resultscore">NUMBER / 4</div>
+                        </div>
+                         Test
+                      </label>
+                     
+                     <label class="item item-input">
+                        <div class="input-label selectlabel">
+                          Socialization & Daily Functions
+                        </div>
+                         <div class="resultscore">NUMBER / 4</div>
+                      </label>
+                     
+                     <label class="item item-input">
+                        <div class="input-label selectlabel">
+                          Wellness
+                        </div>
+                         <div class="resultscore">NUMBER / 6</div>
+                      </label>
+                     
+                     <label class="item item-input grandtotal">
+                        <div class="input-label selectlabel">
+                            <b>Grand Total</b>
+                        </div>
+                         <div class="resultscore"><b>NUMBER / 17</b></div>
+                      </label>
+                     
+                     <label class="item item-input item-stacked-label vispdatinput">
+                         <span class="input-label"><b>RESULTS & RECOMMENDATION</b></span>
+                         <div class="resultscore">4-7 an assessment for Rapid Re-Housing</div>
+                      </label>
+                     
+                     <label class="item item-input item-stacked-label vispdatinput">
+                        <span class="input-label">Any additional information / comments</span>
+                        <textarea rows="8" placeholder="Communities are encouraged to think of additional questions that may be relevant to the programs being operated or your specific local context."></textarea>
+                      </label>
+                     
+                     
+                     <br><br>
+
+                    </div>
+                </ion-content>
+              </div>  
+  </ion-slide>
+            
 </ion-slide-box>
         
            
