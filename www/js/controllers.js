@@ -434,25 +434,20 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
       $scope.searchBar="openanimate";
     }
 	
-	$scope.toggleList = function () {
-        if ($scope.listBar === "openanimate") {
-            hideList();
-        }
-        else {
-          if ($scope.searchBar === "openanimate") {
-            hideSearch();
-          }
-		  if ($scope.resourcesBar === "openanimate") {
-            hideResources();
-          }
-          showList();
-        }
+    $scope.rtmover="resource-toolbar";
+    $scope.toggleList = function () {
+      if ($scope.rtmover === "resource-toolbar-active") {
+        hideList();
+      }
+      else {
+        showList();
+      }
     }
-    
     hideList = function () {
-	  console.log($scope);
-      $scope.listButton="hidden-resource-button";
-      $scope.listBar="closedanimate";
+      $scope.rtmover="resource-toolbar";
+    }
+    showList = function () {
+      $scope.rtmover="resource-toolbar-active";
     }
     
     myLocation = function(){
@@ -463,11 +458,6 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
     console.log("Could not get location");
   });
   }
-    
-    showList = function () {
-      $scope.listButton="dark-resource-button";
-      $scope.listBar="openanimate";
-    }
     
 	
 	$scope.toggleMap = function () {
