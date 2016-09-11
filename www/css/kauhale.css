@@ -388,11 +388,31 @@ a.tab-item {
 .listcontainer {
     height: 89%;
     width: 100%;
-    background-color: #000;
+    background-color: #eee;
     display: block;
     position: inherit;
 }
 
+
+/* HOME - DETAIL BOX & POPUP */
+	
+.detailcontainer {
+    width: 100%;
+    background-color: #eee;
+    position: absolute;
+    height: 80%;
+    top: -80%;
+    z-index: 1;
+}
+
+.detailcontainer-active {
+    width: 100%;
+    background-color: #eee;
+    position: absolute;
+    height: 80%;
+    top: 0;
+    z-index: 1;
+}
 
 /* REFER PAGE - CAMERA */
 
@@ -1392,4 +1412,33 @@ i.resourceicons {
 .activebutton {
     background-color: #00adb5;
     color: #fff;
+    padding: 1px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.vispdatform {
+    height: 100%;
 }

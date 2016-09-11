@@ -439,24 +439,20 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
       $scope.searchBar="openanimate";
     }
 	
-	$scope.toggleList = function () {
-        if ($scope.listBar === "openanimate") {
-            hideList();
-        }
-        else {
-          if ($scope.searchBar === "openanimate") {
-            hideSearch();
-          }
-		  if ($scope.resourcesBar === "openanimate") {
-            hideResources();
-          }
-          showList();
-        }
+    $scope.rtmover="resource-toolbar";
+    $scope.toggleList = function () {
+      if ($scope.rtmover === "resource-toolbar-active") {
+        hideList();
+      }
+      else {
+        showList();
+      }
     }
-    
     hideList = function () {
-      $scope.listButton="hidden-resource-button";
-      $scope.listBar="closedanimate";
+      $scope.rtmover="resource-toolbar";
+    }
+    showList = function () {
+      $scope.rtmover="resource-toolbar-active";
     }
     
     myLocation = function(){
@@ -467,11 +463,6 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
     console.log("Could not get location");
   });
   }
-    
-    showList = function () {
-      $scope.listButton="dark-resource-button";
-      $scope.listBar="openanimate";
-    }
     
 	
 	$scope.toggleMap = function () {
@@ -529,7 +520,7 @@ function ($scope, $stateParams, shelMaps) {
 
 }])
 
-.controller('volunteerCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('vispdatCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
@@ -546,6 +537,15 @@ function ($scope, $stateParams) {
 }])
    
 .controller('eventsCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+function ($scope, $stateParams) {
+
+
+}])
+
+
+.controller('loginCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
