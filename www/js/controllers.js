@@ -446,6 +446,9 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
       }
       else {
         showList();
+        if ($scope.detailmover === "detailcontainer-active") {
+          hideDetails();
+        }
       }
     }
     hideList = function () {
@@ -453,6 +456,25 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
     }
     showList = function () {
       $scope.rtmover="resource-toolbar-active";
+    }
+    
+    $scope.detailmover="detailcontainer";
+    $scope.toggleDetails = function () {
+      if ($scope.detailmover === "detailcontainer-active") {
+        hideDetails();
+      }
+      else {
+        showDetails();
+        if ($scope.rtmover === "resource-toolbar-active") {
+          hideList();
+        }
+      }
+    }
+    hideDetails = function () {
+      $scope.detailmover="detailcontainer";
+    }
+    showDetails = function () {
+      $scope.detailmover="detailcontainer-active";
     }
     
     myLocation = function(){
