@@ -264,6 +264,8 @@ function ($scope, $stateParams) {
 function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 	var gmarkers1 = [];
 	var apiKey = false;
+	var infoWindow;
+	var marker;
 	
 	  function initMap(){
 		var options = {timeout: 10000, enableHighAccuracy: true};
@@ -326,7 +328,7 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 			  var record = records[i];   
 			  var markerPos = new google.maps.LatLng(record.lat, record.lng);
 			  // Add the markerto the map
-			  var marker = new google.maps.Marker({
+			  marker = new google.maps.Marker({
 				  category: record.cat,
 				  map: $scope.map,
 				  icon: icons[record.cat].icon,
@@ -344,9 +346,10 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 	  }
 	 
 	  function addInfoWindow(marker, message, record) {
-	 
-		  var infoWindow = new google.maps.InfoWindow({
-			  content: message
+	      var contentString = "<button ng-click='toggleList()' ng-class='listButton' class='r-listview'>VIEW LIST <i class='ion-ios-list-outline'></i></button>"
+		  var compileContent = $compile(contentString)($scope)
+		  infoWindow = new google.maps.InfoWindow({
+			  content: compileContent[0]
 		  });
 	 
 		  google.maps.event.addListener(marker, 'click', function() {
@@ -379,7 +382,9 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
     // Instantiate map filter bars as hidden
     $scope.resourceBar = "closedanimateresources";
     $scope.searchBar = "closedanimatesearch";
-    
+    $scope.testingOutput = function(){
+		console.log("called");
+	}
     $scope.toggleResources = function () {
         if ($scope.resourcesBar === "openanimate") {
             hideResources();
