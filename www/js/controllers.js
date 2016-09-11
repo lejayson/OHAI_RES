@@ -264,8 +264,8 @@ function ($scope, $stateParams) {
 function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 	var gmarkers1 = [];
 	var apiKey = false;
+	var infoWindow;
 	var marker;
-	var prev_infoWindow;
 	
 	  function initMap(){
 		var options = {timeout: 10000, enableHighAccuracy: true};
@@ -331,12 +331,15 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 			  marker = new google.maps.Marker({
 				  category: record.cat,
 				  map: $scope.map,
+				  icon: icons[record.cat].icon,
 				  animation: google.maps.Animation.DROP,
 				  position: markerPos
 			  });
-	          angular.element(document.getElementById('listContainer')).append($compile("<li class='listviewstyle'><span>"+record.name+"</span><p>Date Refered:"+record.referdate+"</p><p>Gender: "+record.gender+"</p><p><button ng-click='toggleList()' onclick='gotoLocation("+record.lat+","+record.lng+")' class='listmapbutton'>View Details</button></p></li>")($scope));     
+	          angular.element(document.getElementById('listContainer')).append($compile("<li class='listviewstyle'><span>"+record.name+"</span><p>"+record.address+"</p><p>Hours of Operation:"+record.hour+"</p><p><a href='"+record.website+"'>Visit Website</a><button ng-click='toggleList()' onclick='gotoLocation("+record.lat+","+record.lng+")' class='listmapbutton'>View on Map</button></p></li>")($scope));
+			  var infoWindowContent = "<h4>"+ record.name + "</h4>";          
 	          gmarkers1.push(marker);
-			  addInfoWindow(marker, record);
+			  addInfoWindow(marker, infoWindowContent, record);
+	 
 			}
 	 
 		  }); 
@@ -344,18 +347,16 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 	  function addInfoWindow(marker, record) {
 	      //var contentString = "<button ng-click='toggleList()' ng-class='listButton' class='r-listview'>VIEW LIST <i class='ion-ios-list-outline'></i></button>"
 		  var contentString = "<span>"+record.name+"<div></span><p>Date Refered:"+record.referdate+"</p><p>Gender: "+record.gender+"</p><p><button ng-click='toggleList()' onclick='gotoLocation("+record.lat+","+record.lng+")' class='listmapbutton'>View Details</button></p></div>"
+
 		  var compileContent = $compile(contentString)($scope)
-		  var infoWindow = new google.maps.InfoWindow({
+		  infoWindow = new google.maps.InfoWindow({
 			  content: compileContent[0]
 		  });
 	 
 		  google.maps.event.addListener(marker, 'click', function() {
-			  if(prev_infoWindow){
-				  prev_infoWindow.close();
-			  }
-			  prev_infoWindow = infoWindow;
 			  infoWindow.open($scope.map, marker);
 		  });
+	 
 	  }
 	  filterMarkers = function (e) {
 		   var category = e;
@@ -478,7 +479,6 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
     }
     
     myLocation = function(){
-	var options = {timeout: 10000, enableHighAccuracy: true};
 	$cordovaGeolocation.getCurrentPosition(options).then(function(position){
     coord = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     $scope.map.panTo(coord);
@@ -509,7 +509,7 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
   return {
     getMarkers: function(){
 		
-      return $http.get("http://test.appkauhale.com/responderMarker.php").then(function(response){
+      return $http.get("http://test.appkauhale.com/allmarkers.php").then(function(response){
           markers = response;
           return markers;
       });
