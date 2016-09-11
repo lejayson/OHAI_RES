@@ -1,0 +1,12 @@
+{
+  "name": "Responders App",
+  "app_id": "b24d0b5c",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
+}

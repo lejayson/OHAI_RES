@@ -1,0 +1,127 @@
+<ion-view title="Refer" id="page2">
+<ion-view title="Refer" id="page2">
+<ion-tabs class="tabs-striped refer-nav tabs-icon-top tabs-top" scroll="false">
+    
+    
+<!------------------------ TAB FOR THE MAP ------------------------>
+
+  <ion-tab title="Location" icon-on="ion-ios-navigate" icon-off="ion-ios-navigate-outline">
+      <ion-content padding="true" class="has-header has-tabs-top" scroll="false">
+      
+        <!-- EDIT CONTENT HERE
+          
+        <form id="resources-form2" class="list">
+            <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="search" placeholder="">
+            </label>
+        </form>
+        <ion-list id="resources-list1">
+            <ion-item id="resources-list-item5">Item 1</ion-item>
+            <ion-item id="resources-list-item6">Item 2</ion-item>
+            <ion-item id="resources-list-item7">Item 3</ion-item>
+        </ion-list>-->
+          <div id="refermap" data-tap-disabled="true"></div>
+        <!-- END CONTENT -->
+          
+        <!-- END CONTENT -->
+          
+      </ion-content>
+  </ion-tab>
+    
+
+<!------------------------ TAB FOR THE CAMERA ------------------------>
+    
+
+  <ion-tab title="Images" icon-on="ion-ios-camera" icon-off="ion-ios-camera-outline">
+      <ion-content padding="true" class="has-header" scroll="false">
+      
+        <!-- EDIT CONTENT HERE -->
+          
+        <form id="resources-form2" class="list">
+            <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="search" placeholder="">
+            </label>
+        </form>
+        <ion-list id="resources-list1">
+            <ion-item id="resources-list-item5">Item 1</ion-item>
+            <ion-item id="resources-list-item6">Item 2</ion-item>
+        </ion-list>
+          
+        <!-- END CONTENT -->
+    
+    </ion-content>
+  </ion-tab> 
+    
+
+<!------------------------ TAB FOR THE FORMS ------------------------>
+    
+
+  <ion-tab title="Info" icon-on="ion-ios-list" icon-off="ion-ios-list-outline">
+      <ion-content padding="true" class="has-header" scroll="true">
+      
+        <!-- EDIT CONTENT HERE -->
+          
+        <div class="list referform"> 
+            
+          <label class="item item-input item-stacked-label">
+              <span class="input-label">Their Name (if available)</span>
+            <input type="text" placeholder="John Doe">
+          </label>
+            
+            
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Their Gender</span>
+            <ion-list>
+              <ion-radio ng-model="choice" ng-value="'A'">Female</ion-radio>
+              <ion-radio ng-model="choice" ng-value="'B'">Male</ion-radio>
+            </ion-list>
+          </label>
+            
+          <label class="item item-input item-stacked-label refer-infolabel">        
+          <span class="input-label">MORE INFORMATION</span>
+            </label>      
+              
+          <label class="item item-input item-staced-label refer-infofield">
+            <textarea rows="8" placeholder="Please describe the circumstance of the person."></textarea>
+          </label>
+            
+        </div>
+
+        <!-- END CONTENT -->
+    
+    </ion-content>
+  </ion-tab>
+    
+    
+    
+<!------------------------ TAB FOR THE SUBMIT ------------------------>
+    
+
+  <ion-tab title="Submit" icon-on="ion-checkmark" icon-off="ion-checkmark" class="tabsubmitbutton">
+      <ion-content padding="true" class="has-header" scroll="false">
+      
+        <!-- EDIT CONTENT HERE -->
+          
+        <form id="resources-form2" class="list">
+            <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="search" placeholder="">
+            </label>
+        </form>
+        <ion-list id="resources-list1">
+            <ion-item id="resources-list-item5">Item 1</ion-item>
+            <ion-item id="resources-list-item6">Item 2</ion-item>
+        </ion-list>
+
+        <!-- END CONTENT -->
+    
+    </ion-content>
+  </ion-tab>
+
+</ion-tabs>
+
+</ion-view>
+    
+</ion-view> -->

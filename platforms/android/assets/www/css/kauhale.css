@@ -1,0 +1,190 @@
+body {
+    font-family: 'Lato', sans-serif;
+    letter-spacing: .03em;
+}
+
+/* NAVIGATION CSS */
+
+.bar.bar-stable .title {
+    color: #11323a;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: .06em;
+}
+
+.bar.bar-stable {
+    border-color: #dedede;
+    background-color: #f8f8f8;
+}
+
+.bar-stable .button.button-clear {
+    color: #42cc8a;
+}
+
+.bar .buttons span {
+    display: inline-block;
+    color: #515151;
+    font-size: .9em;
+    text-transform: uppercase;
+    font-family: 'lato', sans-serif;
+    letter-spacing: .08em;
+    padding-left: 2px;
+}
+
+
+/* SIDE MENU CSS */
+
+.menu-content {
+    
+}
+
+.bargreen {
+    border: none;
+    height: 150px;
+    background: #34bb7d; /* Old browsers */
+    background: -moz-linear-gradient(top,  #34bb7d 0%, #1bb499 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  #34bb7d 0%,#1bb499 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  #34bb7d 0%,#1bb499 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+
+}
+
+.has-header-side {
+    top: 150px;
+}
+
+.side-menu-header {
+    font-family: 'Lato', sans-serif;
+    font-size: 2.2em;
+    letter-spacing: .08em;
+    padding: 30px;
+    color: #fff;
+    width: 100%;
+    text-align: left;
+    margin-top: 5px;
+}
+
+.side-menu-header > span {
+    font-size: .5em;
+    letter-spacing: 0;
+    display: block;
+    padding-top: 12px;
+    line-height: 1.3em;
+}
+
+.sidemenu-list {
+    padding-left: 19px;
+    border-bottom: solid 1px #dedede;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #11323a;
+}
+
+/* HOME PAGE - MAP BUTTON */
+
+.map-placeholder {
+    line-height: 250px;
+    text-align: center;
+    background-color: rgb(232, 235, 239);
+    height: 100%
+}
+
+.map-home {
+    height: 50%;
+}
+
+.map-home-button {
+    height:10%;
+    width: 100%;
+    background-color: #11323a;
+    color: #fff;
+    position: relative;
+    display: block;
+    text-align: center;
+    font-size: 16px;
+    letter-spacing: .05em;
+}
+
+.map-home-button > span {
+    /* let it fill the whole container */
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+.map-home-button > span:before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+  }
+
+
+/* HOME PAGE - NAVIGATION BUTTONS */
+
+.home-buttons {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -moz-box-flex: 1;
+    -moz-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    width: 100%;
+    height: 20%;
+}
+
+
+.home-buttons > .home-navbuttons {
+    height:100%;
+    width: 50%;
+    color: #fff;
+    position: relative;
+    display: block;
+    text-align: center;
+    font-size: 16px;
+    letter-spacing: .05em;
+}
+
+.home-buttons > .home-navbuttons > span {
+    /* let it fill the whole container */
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+.home-buttons > .home-navbuttons > span:before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+  }
+
+.navone {
+    background-color: #00adb5;
+}
+
+.navtwo {
+    background-color: #039ba3;
+}
+
+.navthree {
+    background-color: #058890;
+}
+
+.navfour {
+    background-color: #08767e;
+}
