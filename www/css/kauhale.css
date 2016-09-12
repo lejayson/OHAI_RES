@@ -403,6 +403,8 @@ a.tab-item {
     height: 80%;
     top: -80%;
     z-index: 1;
+	visibility:hidden;
+	opacity:0;
 }
 
 .detailcontainer-active {
@@ -412,10 +414,11 @@ a.tab-item {
     height: 80%;
     top: 0;
     z-index: 1;
+	visibility:visible;
+	opacity:1;
 }
 
 /* REFER PAGE - CAMERA */
-
 .camera-button {
     height:55px;
     width: 100%;
@@ -937,6 +940,16 @@ ul#listContainer {
 .submitshow{
 	visibility: visible;
 	opacity: 1;
+}
+
+.detailHide{
+	visibility:hidden;
+	opacity:0;
+}
+
+.detailShow{
+	visibility:visible;
+	opacity:1;
 }
 
 

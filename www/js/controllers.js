@@ -267,6 +267,7 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 	var infoWindow;
 	var marker;
 	var prev_infoWindow;
+	var records;
 	
 	  function initMap(){
 		var options = {timeout: 10000, enableHighAccuracy: true};
@@ -309,7 +310,7 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 		  //Get all of the markers from our Markers factory
 		  Markers.getMarkers().then(function(markers){
 			console.log("Markers: ", markers);
-			var records = markers.data.markers;
+			records = markers.data.markers;
 			var iconDir = "/img/map/";
 			var icons = {
 			  food: {
@@ -335,16 +336,18 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 				  animation: google.maps.Animation.DROP,
 				  position: markerPos
 			  });
-	          angular.element(document.getElementById('listContainer')).append($compile("<li class='listviewstyle'><span>"+record.name+"</span><p>Date Refered:"+record.referdate+"</p><p>Gender: "+record.gender+"</p><p><button ng-click='toggleDetails()' onclick='gotoLocation("+record.lat+","+record.lng+")' class='listmapbutton'>View Details</button></p></li>")($scope));
-			  addInfoWindow(marker, record);
+	          angular.element(document.getElementById('listContainer')).append($compile("<li class='listviewstyle'><span>"+record.name+"</span><p>Date Refered:"+record.referdate+"</p><p>Gender: "+record.gender+"</p><p><button ng-click='toggleDetails("+i+")' onclick='gotoLocation("+record.lat+","+record.lng+")' class='listmapbutton'>View Details</button></p></li>")($scope));
+			  addInfoWindow(marker, record, i);
+
 	 
 			}
 	 
 		  }); 
 	  }
-	  function addInfoWindow(marker, record) {
+	  function addInfoWindow(marker, record, i) {
 	      //var contentString = "<button ng-click='toggleList()' ng-class='listButton' class='r-listview'>VIEW LIST <i class='ion-ios-list-outline'></i></button>"
-		  var contentString = "<span>"+record.name+"<div></span><p>Date Refered:"+record.referdate+"</p><p>Gender: "+record.gender+"</p><p><button ng-click='toggleDetails()' onclick='gotoLocation("+record.lat+","+record.lng+")' class='listmapbutton'>View Details</button></p></div>"
+		  var contentString = "<span>"+record.name+"<div></span><p>Date Refered:"+record.referdate+"</p><p>Gender: "+record.gender+"</p><p><button ng-click='toggleDetails("+i+")' onclick='gotoLocation("+record.lat+","+record.lng+")' class='listmapbutton'>View Details</button></p></div>"
+
 		  var compileContent = $compile(contentString)($scope)
 		  var infoWindow = new google.maps.InfoWindow({
 			  content: compileContent[0]
@@ -461,7 +464,10 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
     }
     
     $scope.detailmover="detailcontainer";
-    $scope.toggleDetails = function () {
+    $scope.toggleDetails = function (e) {
+	  var record = records[e];
+	  angular.element(document.getElementById('detailWindow')).empty();
+	  angular.element(document.getElementById('detailWindow')).append($compile("<div ng-class='detailContent'><span>"+record.name+"</span><p>"+record.description+"</p><p>"+record.isgroup+"</p><p>"+record.popcount+"</p><p>Date Refered:"+record.referdate+"</p><p>Gender: "+record.gender+"</p></div>")($scope));
       if ($scope.detailmover === "detailcontainer-active") {
         hideDetails();
       }
