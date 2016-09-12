@@ -9,27 +9,6 @@ angular.module('app.routes', [])
   $stateProvider
     
   
-
-  .state('menu.home', {
-    url: '/home',
-    views: {
-      'side-menu21': {
-        templateUrl: 'pages/home.html',
-        controller: 'homeCtrl'
-      }
-    }
-  })
-
-  .state('menu.about', {
-    url: '/about',
-    views: {
-      'side-menu21': {
-        templateUrl: 'pages/about.html',
-        controller: 'aboutCtrl'
-      }
-    }
-  })
-  
   
   .state('menu.resources', {
     url: '/resources',
@@ -80,15 +59,6 @@ angular.module('app.routes', [])
     }
   })
   
-    .state('menu.getinvolved', {
-    url: '/getinvolved',
-    views: {
-      'side-menu21': {
-        templateUrl: 'pages/getinvolved.html',
-        controller: 'getinvolvedCtrl'
-      }
-    }
-  })
   
   .state('menu.events', {
     url: '/events',
@@ -147,7 +117,7 @@ angular.module('app.routes', [])
   
   
  
-$urlRouterProvider.otherwise('/kauhale/home')
+$urlRouterProvider.otherwise('/kauhale/resources')
   
 
 });

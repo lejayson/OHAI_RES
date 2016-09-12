@@ -1,78 +1,6 @@
 angular.module('app.controllers', [])
 
-.controller('homeCtrl', ['$scope', '$state', '$cordovaGeolocation', '$locationProperties',  // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
 
-function ($scope, $state, $cordovaGeolocation, $locationProperties) {
- var options = {timeout: 10000, enableHighAccuracy: true};
-  var marker;
-  var latLng;
-  $cordovaGeolocation.getCurrentPosition(options).then(function(position){
-    $scope.checkMarker = "opencheck";
-	$scope.closeMarker = "closeclose";
-    latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-    var mapOptions = {
-      center: latLng,
-      zoom: 15,
-      zoomControl: false,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-	  disableDefaultUI: false,
-	  mapTypeControl: false,
-	  streetViewControl: false,
-      styles:[{"featureType":"all","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"all","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"labels","stylers":[{"visibility":"on"}]},{"featureType":"administrative","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#1e7185"}]},{"featureType":"administrative.province","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"administrative.locality","elementType":"labels","stylers":[{"visibility":"on"}]},{"featureType":"administrative.locality","elementType":"labels.text","stylers":[{"visibility":"on"}]},{"featureType":"administrative.locality","elementType":"labels.icon","stylers":[{"visibility":"simplified"}]},{"featureType":"administrative.neighborhood","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"landscape.man_made","elementType":"geometry.fill","stylers":[{"lightness":"44"}]},{"featureType":"landscape.natural","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"landscape.natural","elementType":"geometry.fill","stylers":[{"visibility":"on"}]},{"featureType":"landscape.natural","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"landscape.natural.landcover","elementType":"all","stylers":[{"color":"#ff0000"}]},{"featureType":"landscape.natural.landcover","elementType":"geometry","stylers":[{"lightness":"-89"}]},{"featureType":"landscape.natural.terrain","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"all","stylers":[{"visibility":"on"},{"hue":"#95ff00"}]},{"featureType":"poi.park","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"visibility":"off"}]},{"featureType":"road.highway","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.local","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#9cd7da"}]}]
-      
-    };
-    $scope.map = new google.maps.Map(document.getElementById("homemap"), mapOptions);
-	$locationProperties.setLoc($scope.map.getCenter());
-	google.maps.event.addListener($scope.map, 'dragstart', function(event) {
-	});
-	google.maps.event.addListener($scope.map, 'idle', function(event) {
-		placeMarker($scope.map.getCenter());
-	});
-	function placeMarker(location) {
-	 /**if ( marker ) {*/
-		  $locationProperties.setLoc(location);
-	 /**}else{
-	    marker = new google.maps.Marker({
-		position: location,
-		map: $scope.map,
-	  });
-	  }*/
-	}
-	/**google.maps.event.addListenerOnce($scope.map, 'idle', function(){
- 
-	      marker = new google.maps.Marker({
-		  map: $scope.map,
-		  animation: google.maps.Animation.DROP,
-		  position: latLng
-	  });      
-	 
-	  var infoWindow = new google.maps.InfoWindow({
-		  content: "Here I am!"
-	  });
-	 
-	  google.maps.event.addListener(marker, 'click', function () {
-		  infoWindow.open($scope.map, marker);
-	  });
-	 
-	});*/
- 
-  }, function(error){
-    console.log("Could not get location");
-  });
-  
-  myLocation = function(){
-	$cordovaGeolocation.getCurrentPosition(options).then(function(position){
-    coord = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-    $scope.map.panTo(coord);
-  }, function(error){
-    console.log("Could not get location");
-  });
-		
-  }
-}])
-   
 .controller('referCtrl', ['$scope', '$state', '$cordovaGeolocation', '$locationProperties', '$http', '$infoProperties', 'Camera', '$ionicPlatform',
 // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
@@ -336,7 +264,7 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 				  animation: google.maps.Animation.DROP,
 				  position: markerPos
 			  });
-	          angular.element(document.getElementById('listContainer')).append($compile("<li class='listviewstyle'><span>"+record.name+"</span><p>Date Refered:"+record.referdate+"</p><p>Gender: "+record.gender+"</p><p><button ng-click='toggleDetails("+i+")' onclick='gotoLocation("+record.lat+","+record.lng+")' class='listmapbutton'>View Details</button></p></li>")($scope));
+	          angular.element(document.getElementById('listContainer')).append($compile("<li class='listviewstyle'><div class='list-img'><img class='list-imglink' src='img/placeholders/referral-image.jpg'></div><div class='list-infocont'><span><a  ng-click='toggleDetails("+i+")' onclick='gotoLocation("+record.lat+","+record.lng+")' class='listwindow-name'>"+record.name+"</a><div class='infowindow'></span><p><span class='info-subheader'>Date referred</span> "+record.referdate+"</p><p><span class='info-subheader'>gender</span>: "+record.gender+"</p></div></div></li>")($scope));
 			  addInfoWindow(marker, record, i);
 
 	 
@@ -346,7 +274,7 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 	  }
 	  function addInfoWindow(marker, record, i) {
 	      //var contentString = "<button ng-click='toggleList()' ng-class='listButton' class='r-listview'>VIEW LIST <i class='ion-ios-list-outline'></i></button>"
-		  var contentString = "<span>"+record.name+"<div></span><p>Date Refered:"+record.referdate+"</p><p>Gender: "+record.gender+"</p><p><button ng-click='toggleDetails("+i+")' onclick='gotoLocation("+record.lat+","+record.lng+")' class='listmapbutton'>View Details</button></p></div>"
+		  var contentString = "<span><a ng-click='toggleDetails("+i+")' onclick='gotoLocation("+record.lat+","+record.lng+")' class='infowindow-name'>"+record.name+"</a><div class='infowindow-img'><img class='infowindow-imglink' src='img/placeholders/referral-image.jpg'></div><div class='infowindow'></span><p><span class='info-subheader'>Date referred</span> "+record.referdate+"</p><p><span class='info-subheader'>gender</span>: "+record.gender+"</p></div>"
 
 		  var compileContent = $compile(contentString)($scope)
 		  var infoWindow = new google.maps.InfoWindow({
@@ -467,7 +395,7 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
     $scope.toggleDetails = function (e) {
 	  var record = records[e];
 	  angular.element(document.getElementById('detailWindow')).empty();
-	  angular.element(document.getElementById('detailWindow')).append($compile("<div ng-class='detailContent'><span>"+record.name+"</span><p>"+record.description+"</p><p>"+record.isgroup+"</p><p>"+record.popcount+"</p><p>Date Refered:"+record.referdate+"</p><p>Gender: "+record.gender+"</p></div>")($scope));
+	  angular.element(document.getElementById('detailWindow')).append($compile("<div ng-class='detailContent' class='detailcontentinfo'><span class='info-name'>"+record.name+"</span><div class='detail-img'><img class='detail-imglink' src='img/placeholders/referral-image.jpg'></div><span class='info-subheader'>Description</span><p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."+record.description+"</p><span class='info-subheader'>Amount of People</span><p><b>"+record.isgroup+"</b> "+record.popcount+" Adult  ||  "+record.popcount+" Child</p><p><span class='info-subheader'>DATE REFERRED</span> "+record.referdate+"</p><p><span class='info-subheader'>GENDER</span> "+record.gender+"</p></div>")($scope));
       if ($scope.detailmover === "detailcontainer-active") {
         hideDetails();
       }
@@ -559,13 +487,6 @@ function ($scope, $stateParams) {
 
 }])
 
-.controller('getinvolvedCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
-
-
-}])
    
 .controller('eventsCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
@@ -649,33 +570,5 @@ function ($scope, $stateParams) {
 
 })
 
-.controller("aboutCtrl", function($http, $scope) {
-
-    $scope.init = function() {
-        $http.get("http://ajax.googleapis.com/ajax/services/feed/load", { params: { "v": "1.0", "num":"100", "q": "http://fetchrss.com/rss/57cf1b9e8a93f83b347b23c657313113082.xml" } })
-            .success(function(data) {
-                $scope.rssTitle = data.responseData.feed.title;
-                $scope.rssUrl = data.responseData.feed.feedUrl;
-                $scope.rssSiteUrl = data.responseData.feed.link;
-                $scope.entries = data.responseData.feed.entries;
-                window.localStorage["entries"] = JSON.stringify(data.responseData.feed.entries);
-            })
-            .error(function(data) {
-                console.log("ERROR: " + data);
-                if(window.localStorage["entries"] !== undefined) {
-                    $scope.entries = JSON.parse(window.localStorage["entries"]);
-                }
-            });
-    }
-
-    $scope.browse = function(v) {
-        window.open(v, "_system", "location=yes");
-    }
-    
-    $scope.getPhoto = function(entry) {
-    return entry.content.match(/src="([^"]*)/)[1];
-    }
-
-})
 
 
