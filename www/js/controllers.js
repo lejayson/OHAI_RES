@@ -338,6 +338,7 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 			  });
 	          angular.element(document.getElementById('listContainer')).append($compile("<li class='listviewstyle'><span>"+record.name+"</span><p>Date Refered:"+record.referdate+"</p><p>Gender: "+record.gender+"</p><p><button ng-click='toggleDetails("+i+")' onclick='gotoLocation("+record.lat+","+record.lng+")' class='listmapbutton'>View Details</button></p></li>")($scope));
 			  addInfoWindow(marker, record, i);
+
 	 
 			}
 	 
@@ -346,6 +347,7 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 	  function addInfoWindow(marker, record, i) {
 	      //var contentString = "<button ng-click='toggleList()' ng-class='listButton' class='r-listview'>VIEW LIST <i class='ion-ios-list-outline'></i></button>"
 		  var contentString = "<span>"+record.name+"<div></span><p>Date Refered:"+record.referdate+"</p><p>Gender: "+record.gender+"</p><p><button ng-click='toggleDetails("+i+")' onclick='gotoLocation("+record.lat+","+record.lng+")' class='listmapbutton'>View Details</button></p></div>"
+
 		  var compileContent = $compile(contentString)($scope)
 		  var infoWindow = new google.maps.InfoWindow({
 			  content: compileContent[0]
