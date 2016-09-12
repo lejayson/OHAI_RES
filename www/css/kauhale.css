@@ -135,7 +135,7 @@ ion-item#menu-list-contact > a.item-content {
 
 .mylocationbutton {
     position: absolute;
-    z-index: 9000;
+    z-index: 1;
     top: 10px;
     right: 10px;
     padding-top:5px;
@@ -395,10 +395,68 @@ a.tab-item {
 
 
 /* HOME - DETAIL BOX & POPUP */
+
+
+.infowindow-name {
+    font-size: 1.4em;
+    margin-top: 6px;
+    margin-bottom: 10px;
+    display: block;
+    line-height: 1.3em;
+    color: #1b515f;
+}
+
+.infowindow p {
+    margin-bottom: 0px;
+}
+
+.detail-img {
+    width: 120px;
+    overflow: hidden;
+    height: 120px;
+    margin-bottom: 15px;
+}
+
+.detail-imglink {
+    height: 100%;
+}
+
+.list-img {
+    width: 30%;
+    overflow: hidden;
+    height: 113px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.list-imglink {
+    width: 100%;
+}
 	
+
+.list-infocont {
+    width: 70%;
+    display: inline-block;
+    padding-left: 15px;
+}
+
+
+.infowindow-img {
+    width: 80px;
+    overflow: hidden;
+    height: 80px;
+    float: left;
+    margin-right: 16px;
+}
+
+.infowindow-imglink {
+    height: 100%;
+}
+	
+
 .detailcontainer {
     width: 100%;
-    background-color: #eee;
+    background-color: rgba(243,243,243,.90);
     position: absolute;
     height: 80%;
     top: -80%;
@@ -407,15 +465,60 @@ a.tab-item {
 	opacity:0;
 }
 
+div#detailWindow {
+    height: 100%;
+}
+
 .detailcontainer-active {
     width: 100%;
-    background-color: #eee;
+    background-color: rgba(243,243,243,.95);
     position: absolute;
     height: 80%;
     top: 0;
-    z-index: 1;
+    z-index: 2;
 	visibility:visible;
 	opacity:1;
+}
+
+.closedetail {
+    position: absolute;
+    z-index: 4;
+    top: 10px;
+    right: 10px;
+    padding-top: 5px;
+    padding-bottom: 3px;
+    padding-left: 8px;
+    padding-right: 8px;
+    background-color: #e6e6e6;
+    border-radius: 3px;
+}
+
+.detailcontentinfo {
+    padding: 16px;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+span.info-name {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    display: block;
+    line-height: 1.3em;
+    color: #1b515f;
+}
+
+span.info-subheader {
+    text-transform: uppercase;
+    font-size: .8em;
+    letter-spacing: .1em;
+    color: #099aa0;
+}
+
+.detailcontentinfo p {
+    border-bottom: 1px solid #e8e8e8;
+    padding-bottom: 10px;
+    color: #333;
 }
 
 /* REFER PAGE - CAMERA */
@@ -676,7 +779,12 @@ label.item.item-input.item-stacked-label:first-child {
     height:60%;
     position: absolute;
     top: 80%;
-    z-index: 2;
+    z-index: 100;
+                      -webkit-transition: all .25s ease;
+       -moz-transition: all .25s ease;
+        -ms-transition: all .25s ease;
+         -o-transition: all .25s ease;
+            transition: all .25s ease;
 }
 
 .resource-toolbar-active {
@@ -685,6 +793,11 @@ label.item.item-input.item-stacked-label:first-child {
     position: absolute;
     top: 27%;
     z-index: 2;
+                      -webkit-transition: all .25s ease;
+       -moz-transition: all .25s ease;
+        -ms-transition: all .25s ease;
+         -o-transition: all .25s ease;
+            transition: all .25s ease;
 }
 
 .r-resourcelist {
@@ -761,6 +874,7 @@ label.item.item-input.item-stacked-label:first-child {
     padding-bottom: 8px;
     border: none;
     margin: 0;
+    background-color: #e8e8e8;
 }
 
 .full-widthbutton {
@@ -789,11 +903,7 @@ label.item.item-input.item-stacked-label:first-child {
     z-index: 1;
     display: block;
     width: 100%;
-    position: absolute;
-    /*
     
-    top: 66px;
-    */
 }
 
 .resource-options-list {
@@ -821,17 +931,14 @@ ul#listContainer {
 
 
 .listviewstyle {
-    padding: 16px;
+    padding-top: 23px;
+    padding-bottom: 23px;
+    padding-left: 16px;
+    padding-right: 16px;
     border-bottom: 1px solid #e3e3e3;
     color: #5b5b5b;
 }
 
-.listviewstyle span {
-    display: block;
-    font-weight: 700;
-    font-size: 1.1em;
-    color: #00adb5;
-}
 
 .listviewstyle a {
     padding: 3px 7px 4px 7px;
@@ -843,10 +950,21 @@ ul#listContainer {
     line-height: 2.8em;
 }
 
+.listwindow-name {
+    font-size: 1.4em;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    display: block;
+    line-height: 1.3em;
+    color: #1b515f;
+}
+
 .listmapbutton {
     background-color: #00adb5;
     color: #fff !important;
     border: 1px solid #039ca3 !important;
+    border-radius: 4px !important;
+    margin-top: 12px;
 }
 
 .rbutton1, .rbutton2, .rbutton3, .rbutton4 {
@@ -916,12 +1034,12 @@ ul#listContainer {
     -ms-flex: 1;
     flex: 1;
     width: 100%;
+    
 }
 
 
 .searchbox {
     width:85%;
-    box-shadow: -1px 0px 115px rgba(0, 0, 0, 0.04), 1px 0px 2px rgba(0, 0, 0, 0.2);
 }
 
 .r-searchbox-but {
