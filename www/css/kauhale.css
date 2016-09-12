@@ -50,7 +50,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 }
 
 .menu-content {
-    box-shadow: -1px 0px 115px rgba(0, 0, 0, 0.15), 1px 0px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: -1px 0px 115px rgba(ad0, 0, 0, 0.15), 1px 0px 2px rgba(0, 0, 0, 0.2);
 }
 
 .bargreen {
@@ -424,7 +424,6 @@ a.tab-item {
 .list-img {
     width: 30%;
     overflow: hidden;
-    height: 113px;
     display: inline-block;
     vertical-align: top;
 }
@@ -438,7 +437,7 @@ a.tab-item {
     width: 70%;
     display: inline-block;
     padding-left: 15px;
-}
+} 
 
 
 .infowindow-img {
@@ -960,11 +959,13 @@ ul#listContainer {
 }
 
 .listmapbutton {
-    background-color: #00adb5;
-    color: #fff !important;
-    border: 1px solid #039ca3 !important;
-    border-radius: 4px !important;
-    margin-top: 12px;
+background-color: #00adb5;
+    color: #eee !important;
+    border: 1px solid #0ca0a7 !important;
+    margin-top: 7px;
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .rbutton1, .rbutton2, .rbutton3, .rbutton4 {
@@ -1039,11 +1040,11 @@ ul#listContainer {
 
 
 .searchbox {
-    width:85%;
+    width:80%;
 }
 
 .r-searchbox-but {
-    width: 15%;
+    width: 20%;
     height: 50px;
     background-color: #00adb5;
     padding: 0;
