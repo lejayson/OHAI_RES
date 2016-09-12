@@ -17,10 +17,10 @@ angular.module('app.services', [])
     var name;
     
     return {
-        getNm: function() {
+        getName: function() {
             return name;
         },
-        setNm: function(nm) {
+        setName: function(nm) {
             name = nm;
         }
     }
