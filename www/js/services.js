@@ -23,18 +23,6 @@ angular.module('app.services', [])
         setName: function(nm) {
             name = nm;
         }
-		getGender: function() {
-            return name;
-        },
-        setGender: function(nm) {
-            name = nm;
-        }
-		get: function() {
-            return name;
-        },
-        setNm: function(nm) {
-            name = nm;
-        }
     }
 });
 
