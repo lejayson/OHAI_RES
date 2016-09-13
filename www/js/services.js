@@ -15,6 +15,8 @@ angular.module('app.services', [])
 
 .service('$infoProperties', function() {
     var name;
+	var gender;
+	var description;
     
     return {
         getName: function() {
@@ -22,6 +24,18 @@ angular.module('app.services', [])
         },
         setName: function(nm) {
             name = nm;
+        },
+		getGender: function() {
+            return gender;
+        },
+        setGender: function(gend) {
+            gender = gend;
+        },
+		getDesc: function() {
+            return description;
+        },
+        setDesc: function(desc) {
+            description = desc;
         }
     }
 });
