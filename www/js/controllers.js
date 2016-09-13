@@ -265,9 +265,8 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 				  position: markerPos
 			  });
 	          angular.element(document.getElementById('listContainer')).append($compile("<li class='listviewstyle'><div class='list-img'><img class='list-imglink' src='img/placeholders/referral-image.jpg'></div><div class='list-infocont'><span><a  ng-click='toggleDetails("+i+")' onclick='gotoLocation("+record.lat+","+record.lng+")' class='listwindow-name'>"+record.name+"</a><div class='infowindow'></span><p><span class='info-subheader'>Date referred</span> "+record.referdate+"</p><p><span class='info-subheader'>gender</span>: "+record.gender+"</p></div></div></li>")($scope));
+			  gmarkers1.push(marker);
 			  addInfoWindow(marker, record, i);
-
-	 
 			}
 	 
 		  }); 
@@ -310,7 +309,28 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 			   }
         }
       }
-      initMap();
+	$scope.filterNewReferrals = function (e) {
+		for (i = 0; i < gmarkers1.length; i++) {
+			var curdate = new Date();
+			var withinMonth = Date.parse(new Date(curdate.getFullYear(), curdate.getMonth(), curdate.getDate() - 30));
+			var refdate = Date.parse(records[i].referdate);
+			if(e === 'All'){
+				   marker = gmarkers1[i];
+				   marker.setVisible(true);
+			}else{
+				marker = gmarkers1[i];
+				// If is same category or category not picked
+				if (refdate < withinMonth) {
+					marker.setVisible(true);
+				}
+				// Categories don't match 
+				else {
+					marker.setVisible(false);
+			    }
+			}
+        }
+	}
+    initMap();
     
     // Instantiate map filter bars as hidden
     $scope.resourceBar = "closedanimateresources";
