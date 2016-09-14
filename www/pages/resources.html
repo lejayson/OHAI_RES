@@ -29,10 +29,10 @@
 						<img class='list-imglink' src='img/placeholders/referral-image.jpg'>
 					</div>
 					<div class='list-infocont'>
-					<span><a  ng-click="toggleDetails({{$index}}); gotoLocation({{marker.lat}},{{marker.lng}})" class='listwindow-name'>{{marker.name}}</a>
-					<div class='infowindow'></span>
-						<p><span class='info-subheader'>Date referred</span>{{marker.referdate}}</p>
-						<p><span class='info-subheader'>gender</span>:{{marker.gender}}</p>
+					<span><a ng-click="toggleDetails({{$index}}); gotoLocation({{marker.lat}},{{marker.lng}})" class='listwindow-name'>{{marker.name}}</a></span>
+					<div class='infowindow'>
+						<p><span class='info-subheader'>Date referred</span> {{marker.referdate}}</p>
+						<p><span class='info-subheader'>gender</span> {{marker.gender}}</p>
 					</div>
 					</div>
 				</li>
@@ -61,8 +61,8 @@
         
         
         <div class="home-buttons">
-            <button ng-click="filterNewReferrals('Filter')" id="home-button1" class="home-navbuttons navthree"><div class="homebutcent"><i class="ion-android-contacts homebuttonicon"></i><br><span>NEW REFERRALS</span></div></button>
-            <button ng-click="filterNewReferrals('All')" id="home-button1" class="home-navbuttons navfour"><div class="homebutcent"><i class="ion-ios-calendar homebuttonicon"></i><br><span>ACTIVE</span></div></button>
+            <button ng-click="filterNewReferrals('Filter')" id="home-button1" class="home-navbuttons navone"><div class="homebutcent"><i class="ion-person-add homebuttonicon"></i><br><span>NEW REFERRALS</span></div></button>
+            <button ng-click="filterNewReferrals('All')" id="home-button1" class="home-navbuttons navtwo"><div class="homebutcent"><i class="ion-person-stalker homebuttonicon"></i><br><span>ACTIVE</span></div></button>
         </div>
 
         

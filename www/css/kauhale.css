@@ -260,12 +260,12 @@ ion-item#menu-list-contact > a.item-content {
     font-size: 16px;
     letter-spacing: .05em;
     text-decoration: none;
+    border: none;
 }
 
 .homebutcent {
     position: relative;
     top: 50%;
-    margin-top: -27px;
     text-decoration: none !important;
     line-height: 25px;
 }
@@ -434,10 +434,12 @@ a.tab-item {
 }
 
 .list-img {
-    width: 30%;
+    width: 25%;
     overflow: hidden;
     display: inline-block;
     vertical-align: top;
+    float: left;
+    height: 80px;
 }
 
 .list-imglink {
@@ -446,7 +448,7 @@ a.tab-item {
 	
 
 .list-infocont {
-    width: 70%;
+    width: 75%;
     display: inline-block;
     padding-left: 15px;
 } 
