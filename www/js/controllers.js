@@ -238,42 +238,45 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 		  //Get all of the markers from our Markers factory
 		  Markers.getMarkers().then(function(markers){
 			console.log("Markers: ", markers);
+			$scope.listMarkers = markers.data.markers;
 			records = markers.data.markers;
-			var iconDir = "/img/map/";
+			var iconDir = "img/map/";
 			var icons = {
-			  food: {
-				icon: iconDir + 'food.png'
+			  1: {
+				icon: iconDir + 'active-group.png'
 			  },
-			  medicine: {
-				icon: iconDir + 'medical.png'
+			  0: {
+				icon: iconDir + 'active-individual.png'
 			  },
-			  shelter: {
-				icon: iconDir + 'shelters.png'
-			  },
-			  misc: {
-				icon: iconDir + ''
-			  }
 			};
 			for (var i = 0; i < records.length; i++) {
-			  var record = records[i];   
-			  var markerPos = new google.maps.LatLng(record.lat, record.lng);
-			  // Add the markerto the map
-			  marker = new google.maps.Marker({
-				  category: record.cat,
-				  map: $scope.map,
-				  animation: google.maps.Animation.DROP,
-				  position: markerPos
-			  });
-	          angular.element(document.getElementById('listContainer')).append($compile("<li class='listviewstyle'><div class='list-img'><img class='list-imglink' src='img/placeholders/referral-image.jpg'></div><div class='list-infocont'><span><a  ng-click='toggleDetails("+i+")' onclick='gotoLocation("+record.lat+","+record.lng+")' class='listwindow-name'>"+record.name+"</a><div class='infowindow'></span><p><span class='info-subheader'>Date referred</span> "+record.referdate+"</p><p><span class='info-subheader'>gender</span>: "+record.gender+"</p></div></div></li>")($scope));
-			  gmarkers1.push(marker);
-			  addInfoWindow(marker, record, i);
+			var record = records[i];  
+			var markerimg = {
+				url: icons[record.isgroup].icon,
+				scaledSize: new google.maps.Size(44,66), // scaled size
+				origin: new google.maps.Point(0,0), // origin
+				anchor: new google.maps.Point(22,66) // anchor
+			};
+			   
+			var markerPos = new google.maps.LatLng(record.lat, record.lng);
+			// Add the markerto the map
+			marker = new google.maps.Marker({
+				category: record.cat,
+				map: $scope.map,
+				icon: markerimg,
+				animation: google.maps.Animation.DROP,
+				position: markerPos
+			});
+	        //angular.element(document.getElementById('listContainer')).append($compile("<li class='listviewstyle'><div class='list-img'><img class='list-imglink' src='img/placeholders/referral-image.jpg'></div><div class='list-infocont'><span><a  ng-click='toggleDetails("+i+")' onclick='gotoLocation("+record.lat+","+record.lng+")' class='listwindow-name'>"+record.name+"</a><div class='infowindow'></span><p><span class='info-subheader'>Date referred</span> "+record.referdate+"</p><p><span class='info-subheader'>gender</span>: "+record.gender+"</p></div></div></li>")($scope));
+			gmarkers1.push(marker);
+			addInfoWindow(marker, record, i);
 			}
 	 
-		  }); 
+		}); 
 	  }
 	  function addInfoWindow(marker, record, i) {
 	      //var contentString = "<button ng-click='toggleList()' ng-class='listButton' class='r-listview'>VIEW LIST <i class='ion-ios-list-outline'></i></button>"
-		  var contentString = "<span><a ng-click='toggleDetails("+i+")' onclick='gotoLocation("+record.lat+","+record.lng+")' class='infowindow-name'>"+record.name+"</a><div class='infowindow-img'><img class='infowindow-imglink' src='img/placeholders/referral-image.jpg'></div><div class='infowindow'></span><p><span class='info-subheader'>Date referred</span> "+record.referdate+"</p><p><span class='info-subheader'>gender</span>: "+record.gender+"</p></div>"
+		  var contentString = "<span><a ng-click='toggleDetails("+i+"); gotoLocation("+record.lat+","+record.lng+")' class='infowindow-name'>"+record.name+"</a><div class='infowindow-img'><img class='infowindow-imglink' src='img/placeholders/referral-image.jpg'></div><div class='infowindow'></span><p><span class='info-subheader'>Date referred</span> "+record.referdate+"</p><p><span class='info-subheader'>gender</span>: "+record.gender+"</p></div>";
 
 		  var compileContent = $compile(contentString)($scope)
 		  var infoWindow = new google.maps.InfoWindow({
@@ -312,7 +315,7 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 	$scope.filterNewReferrals = function (e) {
 		for (i = 0; i < gmarkers1.length; i++) {
 			var curdate = new Date();
-			var withinMonth = Date.parse(new Date(curdate.getFullYear(), curdate.getMonth(), curdate.getDate() - 30));
+			var withinMonth = Date.parse(new Date(curdate.getFullYear(), curdate.getMonth(), curdate.getDate() - 1));
 			var refdate = Date.parse(records[i].referdate);
 			if(e === 'All'){
 				   marker = gmarkers1[i];
@@ -320,7 +323,7 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 			}else{
 				marker = gmarkers1[i];
 				// If is same category or category not picked
-				if (refdate < withinMonth) {
+				if (refdate > withinMonth) {
 					marker.setVisible(true);
 				}
 				// Categories don't match 
@@ -351,21 +354,22 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
           }
           showResources();
         }
-    }
+    };
     
     hideResources = function () {
       $scope.resourcesButton="hidden-resource-button";
       $scope.resourcesBar="closedanimate";
-    }
+    };
     
     showResources = function () {
       $scope.resourcesButton="dark-resource-button";
       $scope.resourcesBar="openanimate";
-    }
-    gotoLocation = function (lat,lng){
+    };
+    $scope.gotoLocation = function (lat,lng){
+		console.log("called");
 		coord = new google.maps.LatLng(lat, lng);
         $scope.map.panTo(coord);
-	}
+	};
     $scope.toggleSearch = function () {
         
         if ($scope.searchBar === "openanimate") {
@@ -380,17 +384,17 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
           }
           showSearch();
         }
-    }
+    };
     
     hideSearch = function () {
       $scope.searchButton="hidden-resource-button";
       $scope.searchBar="closedanimate";
-    }
-    
+    };
+  
     showSearch = function () {
       $scope.searchButton="dark-resource-button";
       $scope.searchBar="openanimate";
-    }
+    };
 	
     $scope.rtmover="resource-toolbar";
     $scope.toggleList = function () {
@@ -403,14 +407,14 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
           hideDetails();
         }
       }
-    }
+    };
     hideList = function () {
       $scope.rtmover="resource-toolbar";
-    }
+    };
     showList = function () {
       $scope.rtmover="resource-toolbar-active";
-    }
-    
+    };
+   
     $scope.detailmover="detailcontainer";
     $scope.toggleDetails = function (e) {
 	  var record = records[e];
@@ -425,13 +429,16 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
           hideList();
         }
       }
-    }
+    };
+	$scope.closeDetails = function () {
+		$scope.detailmover="detailcontainer";
+	};
     hideDetails = function () {
       $scope.detailmover="detailcontainer";
-    }
+    };
     showDetails = function () {
       $scope.detailmover="detailcontainer-active";
-    }
+    };
     
     myLocation = function(){
 	var options = {timeout: 10000, enableHighAccuracy: true};
@@ -457,6 +464,22 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
     }
     
 }])
+
+.filter('searchFor', function(){
+	return function(arr, searchString){
+		if(!searchString){
+			return arr;
+		}
+		var result = [];
+		searchString = searchString.toLowerCase();
+		angular.forEach(arr, function(marker){
+			if(marker.name.toLowerCase().indexOf(searchString) !== -1){
+			result.push(marker);
+		}
+		});
+		return result;
+	};
+})
 
 .factory('Markers', function($http) {
 	
