@@ -15,7 +15,7 @@
             <div class="searchbox">
               <label class="item item-input rsearchcontainer">
                 <i class="icon ion-search placeholder-icon"></i>
-                <input id="searchMarkervalue" ng-model="searchMarker" ng-change="filterMarkers('S')" type="text" placeholder="Search" />
+                <input type="text" class="search" ng-model="searchString" placeholder="Enter your search terms" />
               </label>
             </div>
             <button ng-click="toggleSearch()" ng-click="filterMarkers('All');" class="r-searchbox-but">DONE</button>
@@ -23,17 +23,29 @@
           </div>
         </div>
             
-					<ul id="listContainer">
-					</ul>
+			<ul id="listContainer">
+				<li class='listviewstyle' ng-repeat="marker in listMarkers | searchFor:searchString">
+					<div class='list-img'>
+						<img class='list-imglink' src='img/placeholders/referral-image.jpg'>
+					</div>
+					<div class='list-infocont'>
+					<span><a  ng-click="toggleDetails({{$index}}); gotoLocation({{marker.lat}},{{marker.lng}})" class='listwindow-name'>{{marker.name}}</a>
+					<div class='infowindow'></span>
+						<p><span class='info-subheader'>Date referred</span>{{marker.referdate}}</p>
+						<p><span class='info-subheader'>gender</span>:{{marker.gender}}</p>
+					</div>
+					</div>
+				</li>
+			</ul>
             
-			</div>
+		</div>
             
 		</div>
             
             <div class="bottom-nav"></div>
         </div>
         <div ng-class="detailmover">
-        <div onclick="" class="closedetail"><i class="ion-close locationicon"></i></div>
+        <div ng-click="closeDetails()" class="closedetail"><i class="ion-close locationicon"></i></div>
 		<div id="detailWindow">
             
 		  Information Box
@@ -49,8 +61,8 @@
         
         
         <div class="home-buttons">
-            <a ui-sref="menu.getinvolved" id="home-button1" class="home-navbuttons navthree"><div class="homebutcent"><i class="ion-android-contacts homebuttonicon"></i><br><span>NEW REFERRALS</span></div></a>
-            <a ui-sref="menu.events" id="ome-button1" class="home-navbuttons navfour"><div class="homebutcent"><i class="ion-ios-calendar homebuttonicon"></i><br><span>ACTIVE</span></div></a>
+            <button ng-click="filterNewReferrals('Filter')" id="home-button1" class="home-navbuttons navthree"><div class="homebutcent"><i class="ion-android-contacts homebuttonicon"></i><br><span>NEW REFERRALS</span></div></button>
+            <button ng-click="filterNewReferrals('All')" id="home-button1" class="home-navbuttons navfour"><div class="homebutcent"><i class="ion-ios-calendar homebuttonicon"></i><br><span>ACTIVE</span></div></button>
         </div>
 
         
