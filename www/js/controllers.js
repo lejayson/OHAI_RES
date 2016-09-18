@@ -707,56 +707,14 @@ function ($scope, $stateParams) {
 }])
 
 
-.controller('eventsCtrl', function($scope) {
-  $scope.items = [{
-      time: '9:30AM',
-      title: 'Summer Fun Events',
-      date: 'August 25, 2016',
-      location: 'Kaʻaahi Women & Family Shelter',
-      text: 'For the past five years, IHS has collaborated with local business and community members to host Summer Fun programs for homeless keiki, including a wide range of activities from working in a fish pond to learning how to surf.  Each event is an opportunity to teach life-long lessons and values, including responsibility, leadership, caring, collaboration, and the pursuit of excellence, giving keiki a break from the day-to-day stress of living in a shelter.'},{
-      time: '11:30AM',
-      title: 'Mens Bible Study',
-      date: 'August 25, 2016',
-      location: 'At this Shelter',
-      text: 'We host a mens only study from 11:30am to 1:00pm. The kitchen will be serving a hot meal.'},{
-      time: '2:30PM',
-      title: 'Serve with Us',
-      date: 'August 25, 2016',
-      location: 'At this Shelter',
-      text: 'We host a mens only study from 11:30am to 1:00pm. The kitchen will be serving a hot meal.'},{
-      time: '5:30PM',
-      title: 'Orientation',
-      date: 'August 25, 2016',
-      location: 'At this Shelter',
-      text: 'We host a mens only study from 11:30am to 1:00pm. The kitchen will be serving a hot meal.'},{
-      time: '11:30AM',
-      title: 'Mens Bible Study',
-      date: 'August 25, 2016',
-      location: 'At this Shelter',
-      text: 'We host a mens only study from 11:30am to 1:00pm. The kitchen will be serving a hot meal.'},{
-      time: '11:30AM',
-      title: 'Mens Bible Study',
-      date: 'August 25, 2016',
-      location: 'At this Shelter',
-      text: 'We host a mens only study from 11:30am to 1:00pm. The kitchen will be serving a hot meal.'},{
-      time: '11:30AM',
-      title: 'Mens Bible Study',
-      date: 'August 25, 2016',
-      location: 'At this Shelter',
-      text: 'We host a mens only study from 11:30am to 1:00pm. The kitchen will be serving a hot meal.'},{
-      time: '11:30AM',
-      title: 'Mens Bible Study',
-      date: 'August 25, 2016',
-      location: 'At this Shelter',
-      text: 'We host a mens only study from 11:30am to 1:00pm. The kitchen will be serving a hot meal.'
-          
-
-  }];
-
-  /*
-   * if given group is the selected group, deselect it
-   * else, select the given group
-   */
+.controller('eventsCtrl', ['$scope', '$state', '$http', '$ionicPopup','Events', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+function ($scope, $state, $http, $ionicPopup, Events ) {
+	$scope.volunteer = {};
+	Events.getEvents().then(function(events){
+		$scope.items = events.data.events;
+	}); 
   $scope.toggleItem= function(item) {
     if ($scope.isItemShown(item)) {
       $scope.shownItem = null;
@@ -767,9 +725,93 @@ function ($scope, $stateParams) {
   $scope.isItemShown = function(item) {
     return $scope.shownItem === item;
   };
+  
+  $scope.showVolunteer = function(id) {
+    $scope.volunteer.id = id;
+    var confirmPopup = $ionicPopup.show({
+	  template: '<input type="email" ng-model="volunteer.email">',
+      title: 'Please Enter Contact Info.',
+      subTitle: 'For details regarding this event please enter your email address below or please give us a call at (123)456-7890',
+	  scope: $scope,
+	  buttons: [
+	  { text: 'Cancel' },
+	  {
+		text: '<b>Submit</b>',
+		type: 'button-positive',
+		onTap: function(e) {
+			if(!$scope.volunteer.email){
+				e.preventDefault();
+			}else{
+				return $scope.volunteer.email;
+			}
+		}
+	  }
+	  ]
+    });
     
+    confirmPopup.then(function(res) {
+		if (res != null){ 
+		var method = 'POST';
+		var url = 'http://test.appkauhale.com/addEventVolunteer.php';
+		var contactinfo = res;
+		var eventid = $scope.volunteer.id;
+		var data = {
+		  email: contactinfo,
+		  eventid: eventid
+		};
+		$http({
+		  method: method,
+		  url: url,
+		  data: data,
+		  headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+		}).
+		success(function(response) {
+			console.log(JSON.stringify(response));
+		}).
+		error(function(response) {
+			console.log(JSON.stringify(response));
+		});
+		}
+    });
+  };
 
+  $scope.button0 = "activebutton"; $scope.date0 = true;
+  $scope.button1 = ""; $scope.date1 = false;
+  $scope.button2 = ""; $scope.date2 = false;
+  $scope.button3 = ""; $scope.date3 = false;
+  
+  $scope.showDate = function(num) {
+    var dateshow = [false, false, false, false];
+    dateshow[num] = true;
+    
+    // Show divs
+    $scope.date0 = dateshow[0];
+    $scope.date1 = dateshow[1];
+    $scope.date2 = dateshow[2];
+    $scope.date3 = dateshow[3];
+    
+    // Set button active
+    $scope.button0 = (dateshow[0] ? "activebutton":"");
+    $scope.button1 = (dateshow[1] ? "activebutton":"");
+    $scope.button2 = (dateshow[2] ? "activebutton":"");
+    $scope.button3 = (dateshow[3] ? "activebutton":"");
+    
+  }
+
+
+}])
+
+.factory('Events', function($http) {
+	
+  var events = [];
+ 
+  return {
+    getEvents: function(){
+		
+      return $http.get("http://test.appkauhale.com/eventsCal.php").then(function(response){
+          events = response;
+          return events;
+      });
+    }
+  };
 })
-
-
-
