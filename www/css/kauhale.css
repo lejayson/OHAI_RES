@@ -32,6 +32,17 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     background-color: #f8f8f8;
 }
 
+.volunteerBttn {
+    padding: 7px;
+    padding-left: 8px;
+    padding-right: 8px;
+    background-color: #42cc8a;
+    border: none;
+    color: #fff;
+    letter-spacing: .05em;
+    margin-top: 10px;
+}
+
 .bar-stable .button.button-clear {
     color: #42cc8a;
 }
@@ -1553,7 +1564,6 @@ i.resourceicons {
 .activebutton {
     background-color: #00adb5;
     color: #fff;
-    padding: 1px;
 }
 
 
