@@ -25,16 +25,18 @@
             
 			<ul id="listContainer">
 				<li class='listviewstyle' ng-repeat="marker in listMarkers | searchFor:searchString">
+				<div ng-click="toggleDetails({{$index}}); gotoLocation({{marker.lat}},{{marker.lng}})" class="detailbuttonlist">
 					<div class='list-img'>
-						<img class='list-imglink' src='img/placeholders/referral-image.jpg'>
+						<img class='list-imglink' src='{{marker.imgurl}}'>
 					</div>
 					<div class='list-infocont'>
-					<span><a ng-click="toggleDetails({{$index}}); gotoLocation({{marker.lat}},{{marker.lng}})" class='listwindow-name'>{{marker.name}}</a></span>
+					<span class='listwindow-name'>{{marker.name}}</span>
 					<div class='infowindow'>
 						<p><span class='info-subheader'>Date referred</span> {{marker.referdate}}</p>
 						<p><span class='info-subheader'>gender</span> {{marker.gender}}</p>
 					</div>
 					</div>
+				</div>
 				</li>
 			</ul>
             

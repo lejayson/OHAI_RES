@@ -1,16 +1,19 @@
 angular.module('app.controllers', [])
 
 
-.controller('referCtrl', ['$scope', '$state', '$cordovaGeolocation', '$locationProperties', '$http', '$infoProperties', 'Camera', '$ionicPlatform',
+.controller('referCtrl', ['$scope', '$state', '$cordovaGeolocation', '$locationProperties', '$http', '$infoProperties', 'Camera', '$ionicPlatform', '$ionicPopup',
 // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $state, $cordovaGeolocation, $locationProperties, $http, $infoProperties, Camera, $ionicPlatform) {
- var options = {timeout: 10000, enableHighAccuracy: true};
+function ($scope, $state, $cordovaGeolocation, $locationProperties, $http, $infoProperties, Camera, $ionicPlatform ,$ionicPopup) {
+var options = {timeout: 10000, enableHighAccuracy: true};
   var marker;
   var latLng;
   $cordovaGeolocation.getCurrentPosition(options).then(function(position){
     latLng = $locationProperties.getLoc();
+	if(!latLng){
+		latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+	}
     var mapOptions = {
       center: latLng,
       zoom: 15,
@@ -22,56 +25,60 @@ function ($scope, $state, $cordovaGeolocation, $locationProperties, $http, $info
         
     };
     $scope.map = new google.maps.Map(document.getElementById("refermap"), mapOptions);
-	google.maps.event.addListener($scope.map, 'click', function(event) {
+	google.maps.event.addListener($scope.map, 'idle', function(event) {
 		placeMarker($scope.map.getCenter());
 	});
 	function placeMarker(location) {
-	  /**if ( marker ) {*/
 		  $locationProperties.setLoc(location);
-	 /**}else{
-	   marker = new google.maps.Marker({
-		position: location,
-		map: $scope.map,
-	  });
-	  }*/
 	}
-	/**google.maps.event.addListenerOnce($scope.map, 'idle', function(){
- 
-	      marker = new google.maps.Marker({
-		  map: $scope.map,
-		  animation: google.maps.Animation.DROP,
-		  position: latLng
-	  });      
-	 
-	  var infoWindow = new google.maps.InfoWindow({
-		  content: "Here I am!"
-	  });
-	 
-	  google.maps.event.addListener(marker, 'click', function () {
-		  infoWindow.open($scope.map, marker);
-	  });
-	 
-	});*/
  
   }, function(error){
-    console.log("Could not get location");
+    $scope.showLocerror();
   });
-  $scope.submitPrompt = "submithidden";
-  $scope.submitForm = function(){
+	$infoProperties.setGender('M');
+	$infoProperties.setEnv('outdoor');
+	$infoProperties.setInv('adult');
+	$scope.submitPrompt = "submithidden";
+	$scope.formID;
+	$scope.submitForm = function(){
 	var latlng = $locationProperties.getLoc();
-	var nm = $infoProperties.getNm();
+	var name = $infoProperties.getName();
+	var gender = $infoProperties.getGender();
+	var description = $infoProperties.getDesc();
+	var environment = $infoProperties.getEnv();
+	var adult = $infoProperties.getAdult();
+	var child = $infoProperties.getChild();
+	var isgroup = $infoProperties.getisGroup();
+	var agegroup = $infoProperties.getInv();
 	var lat = latlng.lat();
 	var lng = latlng.lng();
-    console.log(lat);
-	console.log(lng);
 	var method = 'POST';
+  var subemail = $infoProperties.getEmail();
+  var subphone = $infoProperties.getPhone();
 	  var url = 'http://test.appkauhale.com/postReferral.php';
 	  $scope.codeStatus = "";
-		var data = {
-		  lat: lat,
-		  lng: lng,
-		  nm: nm
-		};
+	    if (isgroup == 0){
+			var data = {
+			  lat: lat,
+			  lng: lng,
+			  name: name,
+			  gender: gender,
+			  description: description,
+			  environment: environment,
+			  isgroup: isgroup,
+			  agegroup: agegroup
+			};
+		}else{
+			var data = {
+			  lat: lat,
+			  lng: lng,
+			  description: description,
+			  environment: environment,
+			  adult: adult,
+			  child: child,
+			  isgroup: isgroup
+			};
+		}
 		$http({
 		  method: method,
 		  url: url,
@@ -79,29 +86,150 @@ function ($scope, $state, $cordovaGeolocation, $locationProperties, $http, $info
 		  headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
 		}).
 		success(function(response) {
-			$scope.codeStatus = response.data;
-			$scope.submitPrompt = "submitprompt";
+		  $imageName = response.imageID;
+		  $scope.showSuccess($imageName);
+      if ($scope.picture != null) {
+        $scope.sendPic($imageName);
+      }
 		}).
 		error(function(response) {
 			$scope.codeStatus = response || "Request failed";
 		});
-  }
+	};
   myLocation = function(){
+    var options = {timeout: 10000, enableHighAccuracy: true};
 	$cordovaGeolocation.getCurrentPosition(options).then(function(position){
     coord = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     $scope.map.panTo(coord);
   }, function(error){
-    console.log("Could not get location");
+    
   });
+  };
+  $scope.saveName = function(e){
+	  console.log(e);
+	  $infoProperties.setName(e);
+  };
+  $scope.saveGender = function(e){
+	  $infoProperties.setGender(e);
+	  console.log($infoProperties.getGender());
+  };
+  $scope.saveDesc = function(e){
+	  $infoProperties.setDesc(e);
+	  console.log($infoProperties.getDesc());
+  };
+  $scope.saveEnv = function(e){
+	  $infoProperties.setEnv(e);
+	  console.log($infoProperties.getEnv());
+  };
+  $scope.saveInv = function(e){
+	  $infoProperties.setInv(e);
+	  console.log($infoProperties.getInv());
+  };
+  $scope.saveAdult = function(e){
+	  $infoProperties.setAdult(e);
+	  console.log($infoProperties.getAdult());
+  };
+  $scope.saveChild = function(e){
+	  $infoProperties.setChild(e);
+	  console.log($infoProperties.getChild());
+  };
+  $scope.saveEmail = function(e){
+	  $infoProperties.setEmail(e);
+	  console.log($infoProperties.getEmail());
+  };
+  $scope.savePhone = function(e){
+	  $infoProperties.setPhone(e);
+	  console.log($infoProperties.getPhone());
+  };
+  $scope.inputAdult = 0;
+  $scope.inputChild = 0;
+  $scope.isValid = function(e){
+	  if($infoProperties.getisGroup() == 1){
+		if($infoProperties.getAdult() == 0 && $infoProperties.getChild() == 0){
+			return false;
+		}else if($infoProperties.getAdult() < 0 || $infoProperties.getChild() < 0 || $infoProperties.getAdult() == null || $infoProperties.getChild() == null || ($infoProperties.getAdult() == null && $infoProperties.getChild() == null)){
+			return false;
+		}else if($locationProperties.getLoc() == null){
+			return false;
+		}else{
+			return true;
+		}  
+	  }else if($infoProperties.getisGroup() == 0){
+		if($locationProperties.getLoc() == null){
+			return false;
+		}else{
+			return true;
+		}  
+	  }else{
+		return false;
+	  }
   }
-  $scope.saveInput = function(e){
-	  $infoProperties.setNm(e);
+    $scope.hasPop = function() {
+	    if($infoProperties.getisGroup() == 1){
+			var population = $infoProperties.getAdult() + $infoProperties.getChild();
+			if(($infoProperties.getAdult() + $infoProperties.getChild()) == 0){
+				return false;
+			}else{
+				return true;
+			}
+	    }else{
+			return true;
+		}
+    }
+	$scope.hasLoc = function() {
+		if($locationProperties == null){
+			return false;
+		}else{
+			return true;
+		}
+	}
+  $scope.isNumberChd = function(e) {
+	  $infoProperties.setChild(e);
+	  if (e < 0) return false; 
+	  if (angular.isNumber(e) && e % 1 == 0){
+		  
+		  return true;
+	  }else{
+		  return false;
+	  }
+  }
+  $scope.isNumberAdl = function(e) {
+	  $infoProperties.setAdult(e);
+	  if (e < 0) return false; 
+	  if (angular.isNumber(e) && e % 1 == 0){
+		  
+		  return true;
+	  }else{
+		  return false;
+	  }
   }
   
   // Camera Functions
+   $scope.showSuccess = function(e) {
+		var alertPopup = $ionicPopup.alert({
+			title: 'Submit Successful',
+			template: '<div>Thank You!!! for your referral. For additional information contact us at (123)456-7890 </br> <b>'+e+'</b></div>'
+		});
+
+		alertPopup.then(function(res) {
+			$state.go('menu.resources'); 
+		});
+	};
+	
+	$scope.showLocerror = function() {
+		var alertPopup = $ionicPopup.alert({
+			title: 'Location Not Found!',
+			template: 'To assist our responders please allow location access for OHAI in Settings. Thank You!'
+		});
+
+		alertPopup.then(function(res) {
+			$state.go('menu.resources'); 
+		});
+	};
+  
   $scope.takePic = function (options) {
-    var options = {
-      quality : 25,
+    options = {
+      quality : 75,
       targetWidth: 1024,
       targetHeight: 1024,
       sourceType: 1, // 0:PHOTOLIBRARY, 1:CAMERA, 2:SAVEDPHOTOALBUM
@@ -114,7 +242,7 @@ function ($scope, $state, $cordovaGeolocation, $locationProperties, $http, $info
     $ionicPlatform.ready(function() {
       if (!navigator.camera) {
         // Load image if unable to get camera
-        $scope.picture='http://community.wdfiles.com/local--files/404/404.jpg';
+        $scope.picture=null;
       } else {
         Camera.getPicture(options).then(function(imagePath) {
           $scope.picture = imagePath;
@@ -131,7 +259,7 @@ function ($scope, $state, $cordovaGeolocation, $locationProperties, $http, $info
     $ionicPlatform.ready(function() {
       var uploadURI = "http://test.appkauhale.com/postimage.php";
       
-      var filename = imageName;
+      var filename = imageName + ".jpg";
       
       var options = {
         fileKey: "file",
@@ -146,19 +274,12 @@ function ($scope, $state, $cordovaGeolocation, $locationProperties, $http, $info
     });
     
     function uploadSuccess(r) {
-      /**
-      Object r {
-        bytesSent: NUMBER,
-        responseCode: HTTP_RESPONSE_CODE,
-        response: ECHO_STRING_RESPONSE,
-        objectId: "" }
-      **/
       console.log(JSON.stringify(r));
-    };
+    }
     
     function uploadError(error) {
       console.log("Error: " + error);
-    };
+    }
     
   };
   
@@ -174,8 +295,31 @@ function ($scope, $state, $cordovaGeolocation, $locationProperties, $http, $info
               $scope.selected = title;
           }
       );
+  };
+  
+  $scope.showPersonPage = function() {
+    $infoProperties.setisGroup(0);
+	console.log($infoProperties.getisGroup());
+    $scope.indform = true;
+    $scope.groupform = false;
+    
+    $scope.personButton="refer-peoplebutton-activated";
+    $scope.peopleButton="";
   }
-
+  $scope.showPeoplePage = function() {
+    $infoProperties.setisGroup(1);
+	console.log($infoProperties.getisGroup());
+    $scope.indform = false;
+    $scope.groupform = true;
+    
+    $scope.personButton="";
+    $scope.peopleButton="refer-peoplebutton-activated";
+  }
+  
+  $scope.userWindow = false;
+  $scope.userInfoWindow = function() {
+    $scope.userWindow = !$scope.userWindow;
+  }
 
 }])
 
@@ -221,6 +365,7 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 		  google.maps.event.addListenerOnce($scope.map, 'idle', function(){
 	 
 			//Load the markers
+			loadCurlocation(latLng);
 			loadMarkers();
 	 
 		  });
@@ -233,12 +378,20 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 		});
 	 
 	  }
+	  
+	  function loadCurlocation(latLng){
+		        locmarker = new google.maps.Marker({
+				map: $scope.map,
+				icon: 'http://leadingagega.org/newsletters/images/blueDot.png',
+				position: latLng
+			});
+	}
 	 
 	  function loadMarkers(){
 		  //Get all of the markers from our Markers factory
 		  Markers.getMarkers().then(function(markers){
-			console.log("Markers: ", markers);
 			$scope.listMarkers = markers.data.markers;
+			$scope.listresponders = markers.data.responders;
 			records = markers.data.markers;
 			var iconDir = "img/map/";
 			var icons = {
@@ -276,7 +429,7 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 	  }
 	  function addInfoWindow(marker, record, i) {
 	      //var contentString = "<button ng-click='toggleList()' ng-class='listButton' class='r-listview'>VIEW LIST <i class='ion-ios-list-outline'></i></button>"
-		  var contentString = "<span><a ng-click='toggleDetails("+i+"); gotoLocation("+record.lat+","+record.lng+")' class='infowindow-name'>"+record.name+"</a><div class='infowindow-img'><img class='infowindow-imglink' src='img/placeholders/referral-image.jpg'></div><div class='infowindow'></span><p><span class='info-subheader'>Date referred</span> "+record.referdate+"</p><p><span class='info-subheader'>gender</span>: "+record.gender+"</p></div>";
+		  var contentString = "<span><a ng-click='toggleDetails("+i+"); gotoLocation("+record.lat+","+record.lng+")' class='infowindow-name'>"+record.name+"</a><div class='infowindow-img'><img class='infowindow-imglink' src='"+record.imgurl+"'></div><div class='infowindow'></span><p><span class='info-subheader'>Date referred</span> "+record.referdate+"</p><p><span class='info-subheader'>gender</span>: "+record.gender+"</p></div>";
 
 		  var compileContent = $compile(contentString)($scope)
 		  var infoWindow = new google.maps.InfoWindow({
@@ -419,7 +572,7 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
     $scope.toggleDetails = function (e) {
 	  var record = records[e];
 	  angular.element(document.getElementById('detailWindow')).empty();
-	  angular.element(document.getElementById('detailWindow')).append($compile("<div ng-class='detailContent' class='detailcontentinfo'><span class='info-name'>"+record.name+"</span><div class='detail-img'><img class='detail-imglink' src='img/placeholders/referral-image.jpg'></div><span class='info-subheader'>Description</span><p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."+record.description+"</p><span class='info-subheader'>Amount of People</span><p><b>"+record.isgroup+"</b> "+record.popcount+" Adult  ||  "+record.popcount+" Child</p><p><span class='info-subheader'>DATE REFERRED</span> "+record.referdate+"</p><p><span class='info-subheader'>GENDER</span> "+record.gender+"</p></div>")($scope));
+	  angular.element(document.getElementById('detailWindow')).append($compile("<div ng-class='detailContent' class='detailcontentinfo'><span class='info-name'>"+record.name+"</span><div class='detail-img'><img class='detail-imglink' src='"+record.imgurl+"'></div><span class='info-subheader'>Description</span><p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."+record.description+"</p><span class='info-subheader'>Amount of People</span><p><b>"+record.isgroup+"</b> "+record.popcount+" Adult  ||  "+record.popcount+" Child</p><p><span class='info-subheader'>DATE REFERRED</span> "+record.referdate+"</p><p><span class='info-subheader'>GENDER</span> "+record.gender+"</p><select ng-model='selResponder' ng-change='assignResp("+e+",selResponder)' data-ng-options='resp as resp.respondername for resp in listresponders'></select></div>")($scope));
       if ($scope.detailmover === "detailcontainer-active") {
         hideDetails();
       }
@@ -430,6 +583,10 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
         }
       }
     };
+	$scope.assignResp = function(e, f){
+		console.log(e);
+		console.log(f);
+	}
 	$scope.closeDetails = function () {
 		$scope.detailmover="detailcontainer";
 	};
@@ -445,6 +602,7 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 	$cordovaGeolocation.getCurrentPosition(options).then(function(position){
     coord = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     $scope.map.panTo(coord);
+	loadCurlocation(coord);
   }, function(error){
     console.log("Could not get location");
   });

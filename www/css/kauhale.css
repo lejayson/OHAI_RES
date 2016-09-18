@@ -433,13 +433,38 @@ a.tab-item {
     height: 100%;
 }
 
+.volunteerBttn {
+    padding: 7px;
+    padding-left: 8px;
+    padding-right: 8px;
+    background-color: #42cc8a;
+    border: none;
+    color: #fff;
+    letter-spacing: .05em;
+    margin-top: 10px;
+}
+
+.pinhome2 {
+    width: 150px;
+    position: absolute;
+    top: 50%;
+    margin-left: -74.5px;
+    margin-top: -127px;
+}
+
+.pinhome {
+        width: 50px;
+    position: absolute;
+    top: 50%;
+    margin-left: -25px;
+    margin-top: -66px;
+}
 .list-img {
-    width: 25%;
+width: 25%;
     overflow: hidden;
     display: inline-block;
     vertical-align: top;
-    float: left;
-    height: 80px;
+    height: 100px;
 }
 
 .list-imglink {
@@ -451,6 +476,8 @@ a.tab-item {
     width: 75%;
     display: inline-block;
     padding-left: 15px;
+    position: inherit;
+	float: right;
 } 
 
 
@@ -598,7 +625,7 @@ span.info-subheader {
     letter-spacing: .05em;
 }
 
-a.button.refer-peoplebutton.activated {
+.refer-peoplebutton-activated {
     background-color: #42cc8a;
     color: #fff;
 }
@@ -945,10 +972,6 @@ ul#listContainer {
 
 
 .listviewstyle {
-    padding-top: 23px;
-    padding-bottom: 23px;
-    padding-left: 16px;
-    padding-right: 16px;
     border-bottom: 1px solid #eee;
     color: #5b5b5b;
 }
@@ -1659,4 +1682,15 @@ i.resourceicons {
     right: 0;
     padding: 0px 16px 0px 0px;
     font-size: 14px;
+}
+
+
+
+
+.detailbuttonlist {
+	    padding-top: 23px;
+    padding-bottom: 23px;
+    padding-left: 16px;
+    padding-right: 16px;
+	
 }
