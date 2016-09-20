@@ -31,7 +31,6 @@ var options = {timeout: 10000, enableHighAccuracy: true};
 	function placeMarker(location) {
 		  $locationProperties.setLoc(location);
 	}
-
   }, function(error){
     $scope.showLocerror();
   });
@@ -56,6 +55,7 @@ var options = {timeout: 10000, enableHighAccuracy: true};
 	var subemail = $infoProperties.getEmail();
 	var subphone = $infoProperties.getPhone();
 	  var url = 'http://test.ohai-app.com/postReferral.php';
+
 	  $scope.codeStatus = "";
 	    if (isgroup == 0){
 			var data = {
@@ -188,7 +188,6 @@ var options = {timeout: 10000, enableHighAccuracy: true};
 	  $infoProperties.setAdult(e);
 	  if (e < 0) return false; 
 	  if (angular.isNumber(e) && e % 1 == 0){
-
 		  return true;
 	  }else{
 		  return false;
@@ -206,7 +205,6 @@ var options = {timeout: 10000, enableHighAccuracy: true};
 			$state.go('menu.resources'); 
 		});
 	};
-
 	$scope.showLocerror = function() {
 		var alertPopup = $ionicPopup.alert({
 			title: 'Location Not Found!',
@@ -217,7 +215,6 @@ var options = {timeout: 10000, enableHighAccuracy: true};
 			$state.go('menu.resources'); 
 		});
 	};
-
   $scope.takePic = function (options) {
     options = {
       quality : 75,
@@ -250,7 +247,6 @@ var options = {timeout: 10000, enableHighAccuracy: true};
       var uploadURI = "http://test.ohai-app.com/postimage.php";
 
       var filename = imageName + ".jpg";
-
       var options = {
         fileKey: "file",
         fileName: filename,
@@ -270,7 +266,6 @@ var options = {timeout: 10000, enableHighAccuracy: true};
     function uploadError(error) {
       console.log("Error: " + error);
     }
-
   };
 
   $scope.itens = [
@@ -366,7 +361,6 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 		});
 
 	}
-
 	  function loadCurlocation(latLng){
 		        locmarker = new google.maps.Marker({
 				map: $scope.map,
@@ -374,7 +368,6 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 				position: latLng
 			});
 	}
-
 	  function loadMarkers(){
 		  //Get all of the markers from our Markers factory
 		  Markers.getMarkers().then(function(markers){
@@ -417,7 +410,9 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 	  }
 	  function addInfoWindow(marker, record, i) {
 	      //var contentString = "<button ng-click='toggleList()' ng-class='listButton' class='r-listview'>VIEW LIST <i class='ion-ios-list-outline'></i></button>"
+
 		  var contentString = "<span ng-click='toggleDetails("+i+"); gotoLocation("+record.lat+","+record.lng+")'><a ng-click='toggleDetails("+i+"); gotoLocation("+record.lat+","+record.lng+")' class='infowindow-name'>"+record.name+"</a><div class='infowindow-img'><img class='infowindow-imglink' src='"+record.imgurl+"'></div><div class='infowindow'></span><p><span class='info-subheader'>Date referred</span> "+record.referdate+"</p><p><span class='info-subheader'>gender</span>: "+record.gender+"</p></div>";
+
 
 		  var compileContent = $compile(contentString)($scope)
 		  var infoWindow = new google.maps.InfoWindow({
@@ -560,6 +555,7 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 	  var record = records[e];
 	  angular.element(document.getElementById('detailWindow')).empty();
 	  angular.element(document.getElementById('detailWindow')).append($compile("<div ng-class='detailContent' class='detailcontentinfo'><span class='info-name'>"+record.name+"</span><div class='detail-img'><img class='detail-imglink' src='"+record.imgurl+"'></div><span class='info-subheader'>Description</span><p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."+record.description+"</p><span class='info-subheader'>Amount of People</span><p><b>"+record.isgroup+"</b> "+record.popcount+" Adult  ||  "+record.popcount+" Child</p><p><span class='info-subheader'>DATE REFERRED</span> "+record.referdate+"</p><p><span class='info-subheader'>GENDER</span> "+record.gender+"</p></div>")($scope));
+
       if ($scope.detailmover === "detailcontainer-active") {
         hideDetails();
       }
