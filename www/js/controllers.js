@@ -22,7 +22,7 @@ var options = {timeout: 10000, enableHighAccuracy: true};
 	  mapTypeControl: false,
 	  streetViewControl: false,
       styles: [{"featureType":"all","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"all","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"labels","stylers":[{"visibility":"on"}]},{"featureType":"administrative","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#1e7185"}]},{"featureType":"administrative.province","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"administrative.locality","elementType":"labels","stylers":[{"visibility":"on"}]},{"featureType":"administrative.locality","elementType":"labels.text","stylers":[{"visibility":"on"}]},{"featureType":"administrative.locality","elementType":"labels.icon","stylers":[{"visibility":"simplified"}]},{"featureType":"administrative.neighborhood","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"landscape.man_made","elementType":"geometry.fill","stylers":[{"lightness":"44"}]},{"featureType":"landscape.natural","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"landscape.natural","elementType":"geometry.fill","stylers":[{"visibility":"on"}]},{"featureType":"landscape.natural","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"landscape.natural.landcover","elementType":"all","stylers":[{"color":"#ff0000"}]},{"featureType":"landscape.natural.landcover","elementType":"geometry","stylers":[{"lightness":"-89"}]},{"featureType":"landscape.natural.terrain","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"all","stylers":[{"visibility":"on"},{"hue":"#95ff00"}]},{"featureType":"poi.park","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"visibility":"off"}]},{"featureType":"road.highway","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.local","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#9cd7da"}]}]
-        
+
     };
     $scope.map = new google.maps.Map(document.getElementById("refermap"), mapOptions);
 	google.maps.event.addListener($scope.map, 'idle', function(event) {
@@ -31,7 +31,7 @@ var options = {timeout: 10000, enableHighAccuracy: true};
 	function placeMarker(location) {
 		  $locationProperties.setLoc(location);
 	}
- 
+
   }, function(error){
     $scope.showLocerror();
   });
@@ -53,9 +53,9 @@ var options = {timeout: 10000, enableHighAccuracy: true};
 	var lat = latlng.lat();
 	var lng = latlng.lng();
 	var method = 'POST';
-  var subemail = $infoProperties.getEmail();
-  var subphone = $infoProperties.getPhone();
-	  var url = 'http://test.appkauhale.com/postReferral.php';
+	var subemail = $infoProperties.getEmail();
+	var subphone = $infoProperties.getPhone();
+	  var url = 'http://test.ohai-app.com/postReferral.php';
 	  $scope.codeStatus = "";
 	    if (isgroup == 0){
 			var data = {
@@ -102,44 +102,35 @@ var options = {timeout: 10000, enableHighAccuracy: true};
     coord = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     $scope.map.panTo(coord);
   }, function(error){
-    
+
   });
   };
   $scope.saveName = function(e){
-	  console.log(e);
 	  $infoProperties.setName(e);
   };
   $scope.saveGender = function(e){
 	  $infoProperties.setGender(e);
-	  console.log($infoProperties.getGender());
   };
   $scope.saveDesc = function(e){
 	  $infoProperties.setDesc(e);
-	  console.log($infoProperties.getDesc());
   };
   $scope.saveEnv = function(e){
 	  $infoProperties.setEnv(e);
-	  console.log($infoProperties.getEnv());
   };
   $scope.saveInv = function(e){
 	  $infoProperties.setInv(e);
-	  console.log($infoProperties.getInv());
   };
   $scope.saveAdult = function(e){
 	  $infoProperties.setAdult(e);
-	  console.log($infoProperties.getAdult());
   };
   $scope.saveChild = function(e){
 	  $infoProperties.setChild(e);
-	  console.log($infoProperties.getChild());
   };
   $scope.saveEmail = function(e){
 	  $infoProperties.setEmail(e);
-	  console.log($infoProperties.getEmail());
   };
   $scope.savePhone = function(e){
 	  $infoProperties.setPhone(e);
-	  console.log($infoProperties.getPhone());
   };
   $scope.inputAdult = 0;
   $scope.inputChild = 0;
@@ -187,7 +178,7 @@ var options = {timeout: 10000, enableHighAccuracy: true};
 	  $infoProperties.setChild(e);
 	  if (e < 0) return false; 
 	  if (angular.isNumber(e) && e % 1 == 0){
-		  
+
 		  return true;
 	  }else{
 		  return false;
@@ -197,13 +188,13 @@ var options = {timeout: 10000, enableHighAccuracy: true};
 	  $infoProperties.setAdult(e);
 	  if (e < 0) return false; 
 	  if (angular.isNumber(e) && e % 1 == 0){
-		  
+
 		  return true;
 	  }else{
 		  return false;
 	  }
   }
-  
+
   // Camera Functions
    $scope.showSuccess = function(e) {
 		var alertPopup = $ionicPopup.alert({
@@ -215,7 +206,7 @@ var options = {timeout: 10000, enableHighAccuracy: true};
 			$state.go('menu.resources'); 
 		});
 	};
-	
+
 	$scope.showLocerror = function() {
 		var alertPopup = $ionicPopup.alert({
 			title: 'Location Not Found!',
@@ -226,7 +217,7 @@ var options = {timeout: 10000, enableHighAccuracy: true};
 			$state.go('menu.resources'); 
 		});
 	};
-  
+
   $scope.takePic = function (options) {
     options = {
       quality : 75,
@@ -238,7 +229,7 @@ var options = {timeout: 10000, enableHighAccuracy: true};
       encodingType: 0, // 0:JPEG, 1:PNG
       allowEdit: false
     };
-    
+
     $ionicPlatform.ready(function() {
       if (!navigator.camera) {
         // Load image if unable to get camera
@@ -246,21 +237,20 @@ var options = {timeout: 10000, enableHighAccuracy: true};
       } else {
         Camera.getPicture(options).then(function(imagePath) {
           $scope.picture = imagePath;
-          console.log(imagePath);
         }, function(err) {
           console.log("Camera Failed: " + err);
         });
       }
     });
   };
-  
+
   $scope.sendPic = function(imageName) {
-    
+
     $ionicPlatform.ready(function() {
-      var uploadURI = "http://test.appkauhale.com/postimage.php";
-      
+      var uploadURI = "http://test.ohai-app.com/postimage.php";
+
       var filename = imageName + ".jpg";
-      
+
       var options = {
         fileKey: "file",
         fileName: filename,
@@ -268,26 +258,26 @@ var options = {timeout: 10000, enableHighAccuracy: true};
         mimeType: "image/jpg",
         params : {'directory':'images', 'fileName':filename}
       };
-      
+
       var ft = new FileTransfer();
       ft.upload($scope.picture, encodeURI(uploadURI), uploadSuccess, uploadError, options);
     });
-    
+
     function uploadSuccess(r) {
       console.log(JSON.stringify(r));
     }
-    
+
     function uploadError(error) {
       console.log("Error: " + error);
     }
-    
+
   };
-  
+
   $scope.itens = [
       { title: "an Individual", checked: false },
       { title: "a Group", checked: false },
   ];
-  
+
   $scope.updateSelection = function(position, itens, title) {
       angular.forEach(itens, function(subscription, index) {
           if (position != index)
@@ -296,26 +286,24 @@ var options = {timeout: 10000, enableHighAccuracy: true};
           }
       );
   };
-  
+
   $scope.showPersonPage = function() {
     $infoProperties.setisGroup(0);
-	console.log($infoProperties.getisGroup());
     $scope.indform = true;
     $scope.groupform = false;
-    
+
     $scope.personButton="refer-peoplebutton-activated";
     $scope.peopleButton="";
   }
   $scope.showPeoplePage = function() {
     $infoProperties.setisGroup(1);
-	console.log($infoProperties.getisGroup());
     $scope.indform = false;
     $scope.groupform = true;
-    
+
     $scope.personButton="";
     $scope.peopleButton="refer-peoplebutton-activated";
   }
-  
+
   $scope.userWindow = false;
   $scope.userInfoWindow = function() {
     $scope.userWindow = !$scope.userWindow;
@@ -327,9 +315,9 @@ var options = {timeout: 10000, enableHighAccuracy: true};
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
- 
+
 }])
-      
+
 .controller('resourcesCtrl', ['$scope', '$stateParams', '$cordovaGeolocation','$compile', 'Markers',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
@@ -340,14 +328,14 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 	var marker;
 	var prev_infoWindow;
 	var records;
-	
-	  function initMap(){
+
+	function initMap(){
 		var options = {timeout: 10000, enableHighAccuracy: true};
-	 
+
 		$cordovaGeolocation.getCurrentPosition(options).then(function(position){
-	 
+
 		  var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-	 
+
 		  var mapOptions = {
 			center: latLng,
 			zoom: 15,
@@ -356,29 +344,29 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 		  mapTypeControl: false,
 		  streetViewControl: false,
           styles: [{"featureType":"all","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"all","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"labels","stylers":[{"visibility":"on"}]},{"featureType":"administrative","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#1e7185"}]},{"featureType":"administrative.province","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"administrative.locality","elementType":"labels","stylers":[{"visibility":"on"}]},{"featureType":"administrative.locality","elementType":"labels.text","stylers":[{"visibility":"on"}]},{"featureType":"administrative.locality","elementType":"labels.icon","stylers":[{"visibility":"simplified"}]},{"featureType":"administrative.neighborhood","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"landscape.man_made","elementType":"geometry.fill","stylers":[{"lightness":"44"}]},{"featureType":"landscape.natural","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"landscape.natural","elementType":"geometry.fill","stylers":[{"visibility":"on"}]},{"featureType":"landscape.natural","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"landscape.natural.landcover","elementType":"all","stylers":[{"color":"#ff0000"}]},{"featureType":"landscape.natural.landcover","elementType":"geometry","stylers":[{"lightness":"-89"}]},{"featureType":"landscape.natural.terrain","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"all","stylers":[{"visibility":"on"},{"hue":"#95ff00"}]},{"featureType":"poi.park","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"visibility":"off"}]},{"featureType":"road.highway","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.local","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#9cd7da"}]}]
-            
+
           }
-	 
+
 		  $scope.map = new google.maps.Map(document.getElementById("resourcemap"), mapOptions);
-	 
+
 		  //Wait until the map is loaded
 		  google.maps.event.addListenerOnce($scope.map, 'idle', function(){
-	 
+
 			//Load the markers
 			loadCurlocation(latLng);
 			loadMarkers();
-	 
+
 		  });
-	 
+
 		}, function(error){
 		  console.log("Could not get location");
-	 
+
 			//Load the markers
 			loadMarkers();
 		});
-	 
-	  }
-	  
+
+	}
+
 	  function loadCurlocation(latLng){
 		        locmarker = new google.maps.Marker({
 				map: $scope.map,
@@ -386,7 +374,7 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 				position: latLng
 			});
 	}
-	 
+
 	  function loadMarkers(){
 		  //Get all of the markers from our Markers factory
 		  Markers.getMarkers().then(function(markers){
@@ -410,7 +398,7 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 				origin: new google.maps.Point(0,0), // origin
 				anchor: new google.maps.Point(22,66) // anchor
 			};
-			   
+
 			var markerPos = new google.maps.LatLng(record.lat, record.lng);
 			// Add the markerto the map
 			marker = new google.maps.Marker({
@@ -424,18 +412,18 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 			gmarkers1.push(marker);
 			addInfoWindow(marker, record, i);
 			}
-	 
+
 		}); 
 	  }
 	  function addInfoWindow(marker, record, i) {
 	      //var contentString = "<button ng-click='toggleList()' ng-class='listButton' class='r-listview'>VIEW LIST <i class='ion-ios-list-outline'></i></button>"
-		  var contentString = "<span><a ng-click='toggleDetails("+i+"); gotoLocation("+record.lat+","+record.lng+")' class='infowindow-name'>"+record.name+"</a><div class='infowindow-img'><img class='infowindow-imglink' src='"+record.imgurl+"'></div><div class='infowindow'></span><p><span class='info-subheader'>Date referred</span> "+record.referdate+"</p><p><span class='info-subheader'>gender</span>: "+record.gender+"</p></div>";
+		  var contentString = "<span ng-click='toggleDetails("+i+"); gotoLocation("+record.lat+","+record.lng+")'><a ng-click='toggleDetails("+i+"); gotoLocation("+record.lat+","+record.lng+")' class='infowindow-name'>"+record.name+"</a><div class='infowindow-img'><img class='infowindow-imglink' src='"+record.imgurl+"'></div><div class='infowindow'></span><p><span class='info-subheader'>Date referred</span> "+record.referdate+"</p><p><span class='info-subheader'>gender</span>: "+record.gender+"</p></div>";
 
 		  var compileContent = $compile(contentString)($scope)
 		  var infoWindow = new google.maps.InfoWindow({
 			  content: compileContent[0]
 		  });
-	 
+
 		  google.maps.event.addListener(marker, 'click', function() {
 			  if(prev_infoWindow){
 				  prev_infoWindow.close();
@@ -443,7 +431,7 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 			  prev_infoWindow = infoWindow;
 			  infoWindow.open($scope.map, marker);
 		  });
-	 
+
 	  }
 	  filterMarkers = function (e) {
 		   var category = e;
@@ -468,7 +456,7 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 	$scope.filterNewReferrals = function (e) {
 		for (i = 0; i < gmarkers1.length; i++) {
 			var curdate = new Date();
-			var withinMonth = Date.parse(new Date(curdate.getFullYear(), curdate.getMonth(), curdate.getDate() - 1));
+			var withinDays = Date.parse(new Date(curdate.getFullYear(), curdate.getMonth(), curdate.getDate() - 5));
 			var refdate = Date.parse(records[i].referdate);
 			if(e === 'All'){
 				   marker = gmarkers1[i];
@@ -476,7 +464,7 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 			}else{
 				marker = gmarkers1[i];
 				// If is same category or category not picked
-				if (refdate > withinMonth) {
+				if (refdate < withinDays) {
 					marker.setVisible(true);
 				}
 				// Categories don't match 
@@ -487,7 +475,7 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
         }
 	}
     initMap();
-    
+
     // Instantiate map filter bars as hidden
     $scope.resourceBar = "closedanimateresources";
     $scope.searchBar = "closedanimatesearch";
@@ -508,23 +496,22 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
           showResources();
         }
     };
-    
+
     hideResources = function () {
       $scope.resourcesButton="hidden-resource-button";
       $scope.resourcesBar="closedanimate";
     };
-    
+
     showResources = function () {
       $scope.resourcesButton="dark-resource-button";
       $scope.resourcesBar="openanimate";
     };
     $scope.gotoLocation = function (lat,lng){
-		console.log("called");
 		coord = new google.maps.LatLng(lat, lng);
         $scope.map.panTo(coord);
 	};
     $scope.toggleSearch = function () {
-        
+
         if ($scope.searchBar === "openanimate") {
             hideSearch();
         }
@@ -538,17 +525,17 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
           showSearch();
         }
     };
-    
+
     hideSearch = function () {
       $scope.searchButton="hidden-resource-button";
       $scope.searchBar="closedanimate";
     };
-  
+
     showSearch = function () {
       $scope.searchButton="dark-resource-button";
       $scope.searchBar="openanimate";
     };
-	
+
     $scope.rtmover="resource-toolbar";
     $scope.toggleList = function () {
       if ($scope.rtmover === "resource-toolbar-active") {
@@ -567,12 +554,12 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
     showList = function () {
       $scope.rtmover="resource-toolbar-active";
     };
-   
+
     $scope.detailmover="detailcontainer";
     $scope.toggleDetails = function (e) {
 	  var record = records[e];
 	  angular.element(document.getElementById('detailWindow')).empty();
-	  angular.element(document.getElementById('detailWindow')).append($compile("<div ng-class='detailContent' class='detailcontentinfo'><span class='info-name'>"+record.name+"</span><div class='detail-img'><img class='detail-imglink' src='"+record.imgurl+"'></div><span class='info-subheader'>Description</span><p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."+record.description+"</p><span class='info-subheader'>Amount of People</span><p><b>"+record.isgroup+"</b> "+record.popcount+" Adult  ||  "+record.popcount+" Child</p><p><span class='info-subheader'>DATE REFERRED</span> "+record.referdate+"</p><p><span class='info-subheader'>GENDER</span> "+record.gender+"</p><select ng-model='selResponder' ng-change='assignResp("+e+",selResponder)' data-ng-options='resp as resp.respondername for resp in listresponders'></select></div>")($scope));
+	  angular.element(document.getElementById('detailWindow')).append($compile("<div ng-class='detailContent' class='detailcontentinfo'><span class='info-name'>"+record.name+"</span><div class='detail-img'><img class='detail-imglink' src='"+record.imgurl+"'></div><span class='info-subheader'>Description</span><p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."+record.description+"</p><span class='info-subheader'>Amount of People</span><p><b>"+record.isgroup+"</b> "+record.popcount+" Adult  ||  "+record.popcount+" Child</p><p><span class='info-subheader'>DATE REFERRED</span> "+record.referdate+"</p><p><span class='info-subheader'>GENDER</span> "+record.gender+"</p></div>")($scope));
       if ($scope.detailmover === "detailcontainer-active") {
         hideDetails();
       }
@@ -596,7 +583,7 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
     showDetails = function () {
       $scope.detailmover="detailcontainer-active";
     };
-    
+
     myLocation = function(){
 	var options = {timeout: 10000, enableHighAccuracy: true};
 	$cordovaGeolocation.getCurrentPosition(options).then(function(position){
@@ -607,8 +594,8 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
     console.log("Could not get location");
   });
   }
-    
-	
+
+
 	$scope.toggleMap = function () {
           if ($scope.searchBar === "openanimate") {
             hideSearch();
@@ -620,7 +607,7 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 			hideList();
 		  }
     }
-    
+
 }])
 
 .filter('searchFor', function(){
@@ -640,13 +627,13 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
 })
 
 .factory('Markers', function($http) {
-	
+
   var markers = [];
- 
+
   return {
     getMarkers: function(){
-		
-      return $http.get("http://test.appkauhale.com/responderMarker.php").then(function(response){
+
+      return $http.get("http://test.ohai-app.com/responderMarker.php").then(function(response){
           markers = response;
           return markers;
       });
@@ -666,7 +653,7 @@ function ($scope, $stateParams, FoodMaps) {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, MedicineMaps) {
-    
+
 	 MedicineMaps.init();
 
 }])
@@ -675,7 +662,7 @@ function ($scope, $stateParams, MedicineMaps) {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, shelMaps) {
-    
+
 	 shelMaps.init();
 
 }])
@@ -688,7 +675,7 @@ function ($scope, $stateParams) {
 
 }])
 
-   
+
 .controller('eventsCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
@@ -725,7 +712,7 @@ function ($scope, $state, $http, $ionicPopup, Events ) {
   $scope.isItemShown = function(item) {
     return $scope.shownItem === item;
   };
-  
+
   $scope.showVolunteer = function(id) {
     $scope.volunteer.id = id;
     var confirmPopup = $ionicPopup.show({
@@ -748,11 +735,11 @@ function ($scope, $state, $http, $ionicPopup, Events ) {
 	  }
 	  ]
     });
-    
+
     confirmPopup.then(function(res) {
 		if (res != null){ 
 		var method = 'POST';
-		var url = 'http://test.appkauhale.com/addEventVolunteer.php';
+		var url = 'http://test.ohai-app.com/addEventVolunteer.php';
 		var contactinfo = res;
 		var eventid = $scope.volunteer.id;
 		var data = {
@@ -779,36 +766,36 @@ function ($scope, $state, $http, $ionicPopup, Events ) {
   $scope.button1 = ""; $scope.date1 = false;
   $scope.button2 = ""; $scope.date2 = false;
   $scope.button3 = ""; $scope.date3 = false;
-  
+
   $scope.showDate = function(num) {
     var dateshow = [false, false, false, false];
     dateshow[num] = true;
-    
+
     // Show divs
     $scope.date0 = dateshow[0];
     $scope.date1 = dateshow[1];
     $scope.date2 = dateshow[2];
     $scope.date3 = dateshow[3];
-    
+
     // Set button active
     $scope.button0 = (dateshow[0] ? "activebutton":"");
     $scope.button1 = (dateshow[1] ? "activebutton":"");
     $scope.button2 = (dateshow[2] ? "activebutton":"");
     $scope.button3 = (dateshow[3] ? "activebutton":"");
-    
+
   }
 
 
 }])
 
 .factory('Events', function($http) {
-	
+
   var events = [];
- 
+
   return {
     getEvents: function(){
-		
-      return $http.get("http://test.appkauhale.com/eventsCal.php").then(function(response){
+
+      return $http.get("http://test.ohai-app.com/eventsCal.php").then(function(response){
           events = response;
           return events;
       });
