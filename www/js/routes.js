@@ -129,7 +129,15 @@ angular.module('app.routes', [])
       }
     }
   })
-  
+  .state('menu.signup', {
+    url: '/signup',
+    views: {
+      'side-menu21': {
+        templateUrl: 'pages/signup.html',
+        controller: 'signupCtrl'
+      }
+    }
+  })
   
 
   .state('menu', {
@@ -148,6 +156,4 @@ angular.module('app.routes', [])
   
  
 $urlRouterProvider.otherwise('/kauhale/home')
-  
-
 });

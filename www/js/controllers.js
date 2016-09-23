@@ -491,7 +491,7 @@ function ($scope, $stateParams, $cordovaGeolocation, $compile, Markers) {
   return {
     getMarkers: function(){
 		
-      return $http.get("http://test.appkauhale.com/allmarkers.php").then(function(response){
+      return $http.get("http://test.ohai-app.com/allmarkers.php").then(function(response){
           markers = response;
           return markers;
       });
@@ -550,13 +550,198 @@ function ($scope, $stateParams) {
 }])
 
 
-.controller('loginCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+.controller('loginCtrl', function ($scope, $state, $usernameProperties, $passwordProperties, $ionicPopup, $http, md5) {
+	$scope.loginform = function(){
 
+	var username = $usernameProperties.getUser();
+	var password = $passwordProperties.getPassword();
+	
+	password = md5.createHash(password || '')
 
-}])
+	var method = 'POST';
+	  var url = 'http://test.ohai-app.com/Credential/validate.php';
+	  $scope.codeStatus = "";
+		var data = {
+		  username: username,
+		  password: password
+		};
+		var empty = "no";
+		for (member in data) {
+			console.log(data[member]);
+			if (data[member] == null || data[member] == "" || data[member] == {}){
+				empty = "yes";
+			}
+		}
+		if (empty == "no"){
+			$http({
+			  method: method,
+			  url: url,
+			  data: data,
+			  headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+			}).
+			success(function(response) {
+				if(response == "rejected"){
+					var failedPopup = $ionicPopup.alert({
+						title: 'ERROR',
+						template: 'Authentication failed'
+					});
+				}
+				else{
+					$state.go('menu.home');
+
+					$scope.username = response[0].username;
+					$scope.email = response[0].email;
+					$scope.role = response[0].role;
+
+					console.log($scope.username);
+					console.log($scope.email);
+					console.log($scope.role);
+				}
+			}).
+			error(function(response) {
+				$scope.codeStatus = response || "Request failed";
+			});
+		}
+		else {
+			var alertPopup = $ionicPopup.alert({
+				title: 'ERROR',
+				template: 'Field empty, please verify!'
+			});
+		}
+	}
+	
+	$scope.loginusername = function(e) {
+		$usernameProperties.setUser(e);
+	}
+
+	$scope.loginpassword = function(e) {
+		$passwordProperties.setPassword(e);
+	}
+/***
+	$scope.data = {};
+		
+	$scope.login = function() {
+		var config = {
+		headers : {
+			'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+		}
+	}
+		LoginService.loginUser($scope.data.username, $scope.data.password, cred, config)
+			.success(function(data) {
+				var alertPopup = $ionicPopup.alert({
+					title: 'You are in!',
+					template: 'Probably pull something from the database...'
+				});
+				$http.get("http://test.appkauhale.com/Credential/credentialquery.php").then(function(response){
+						cred = response;
+						console.log('success', JSON.stringify(cred));
+				});
+			}).error(function(data) {
+				var alertPopup = $ionicPopup.alert({
+					title: 'Login failed!',
+					template: 'Please check your credentials!'
+				});
+			});
+	}
+	$scope.authenticate = function() {
+		var cred = JSON.stringify({
+		username: $scope.data.username
+	});
+	}
+	
+***/
+})
+
+.controller('signupCtrl', function ($scope, $state, $usernameProperties, $passwordProperties, $confpasswordProperties, $emailProperties, $roleProperties, $ionicPopup, $http, md5) {
+	$scope.newuserform = function(){
+		
+		var username = $usernameProperties.getUser();
+		var password = $passwordProperties.getPassword();
+		var cpassword = $confpasswordProperties.getconfPassword();
+		var email = $emailProperties.getemail();
+		var role = $roleProperties.getrole();
+		
+		console.log("#2 Password: " + $passwordProperties.getPassword() + " confpassword: " + $confpasswordProperties.getconfPassword());
+		
+		if(cpassword == password) {
+			password = md5.createHash(password || '')
+
+			var method = 'POST';
+			  var url = 'http://test.ohai-app.com/Credential/newuser.php';
+
+				var data = {
+				  username: username,
+				  password: password,
+				  email: email,
+				  role: role
+				};
+				var empty = "no";
+				for (member in data) {
+					console.log(data[member]);
+					if (data[member] == null || data[member] == "" || data[member] == {}){
+						empty = "yes";
+					}
+				}
+				if (empty == "no"){
+					$http({
+					  method: method,
+					  url: url,
+					  data: data,
+					  headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+					}).
+					success(function(response) {
+						if(response == "failed"){
+							var failedPopup = $ionicPopup.alert({
+								title: 'ERROR',
+								template: username + ' already exist!'
+							});
+						}
+						else{
+							var createPopup = $ionicPopup.alert({
+								title: 'User Created',
+								template: username + ' is created!'
+							});
+							$state.go('menu.home');
+						}
+					}).
+					error(function(response) {
+						console.log("Request failed");
+						//$scope.codeStatus = response || "Request failed";
+					});
+				}
+				else{
+					var alertPopup = $ionicPopup.alert({
+						title: 'ERROR',
+						template: 'Field empty, please verify!'
+					});
+				}
+		}
+		else {
+			var alertPopup = $ionicPopup.alert({
+				title: 'Password not match',
+				template: 'Please check your Password!'
+			});
+		}
+
+	}
+	
+	$scope.newusername = function(e) {
+		$usernameProperties.setUser(e);
+	}
+	$scope.newpassword = function(e) {
+		$passwordProperties.setPassword(e);
+	}
+	$scope.newconfpassword = function(e) {
+		$confpasswordProperties.setconfPassword(e);
+	}
+	$scope.newemail = function(e) {
+		$emailProperties.setemail(e);	
+	}
+	$scope.newrole = function(e) {
+		$roleProperties.setrole(e);
+	}
+	
+})
 
 
 .controller('eventsCtrl', function($scope) {

@@ -1,0 +1,28 @@
+<ion-view title="Signup" id="Signup">
+    <ion-content padding="true" class="has-header">
+            <div class="list">
+                          <label class="item item-input item-stacked-label">
+                            <span class="input-label">Username</span>
+                            <input type="text" placeholder="Username" ng-model="signupname" ng-blur="newusername(signupname)">
+                          </label>
+                          <label class="item item-input item-stacked-label">
+                            <span class="input-label">Password</span>
+                            <input type="password" placeholder="Password" ng-model="signuppassword" ng-blur="newpassword(signuppassword)">
+                          </label>
+						 <label class="item item-input item-stacked-label">
+                            <span class="input-label">Confirm Password</span>
+                            <input type="password" placeholder="Confirm Password" ng-model="signupconfpassword" ng-blur="newconfpassword(signupconfpassword)">
+                          </label>
+						  <label class="item item-input item-stacked-label">
+                            <span class="input-label">Email</span>
+                            <input type="email" placeholder="Email" ng-model="signupemail" ng-blur="newemail(signupemail)">
+                          </label>
+						  <label class="item item-input item-stacked-label">
+                            <span class="input-label">Role</span>
+                            <input type="text" placeholder="Role" ng-model="signuprole" ng-blur="newrole(signuprole)">
+                          </label>
+                <button class="button button-block button-calm" ng-click="newuserform()">Create</button>
+            </div>
+        
+    </ion-content>
+</ion-view>
