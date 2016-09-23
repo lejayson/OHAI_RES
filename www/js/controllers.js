@@ -680,15 +680,14 @@ function ($scope, $stateParams) {
 
 }])
 
-
-.controller('loginCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('logoutCtrl', ['$scope', '$state', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
-
-
+function ($scope, $state, $stateParams) {
+	$scope.logoutform = function(){
+		$state.go('menu.login');
+	}
 }])
-
 
 .controller('eventsCtrl', ['$scope', '$state', '$http', '$ionicPopup','Events', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
@@ -783,6 +782,72 @@ function ($scope, $state, $http, $ionicPopup, Events ) {
 
 
 }])
+
+.controller('loginCtrl', function ($scope, $state, $usernameProperties, $passwordProperties, $ionicPopup, $http, $ionicHistory, md5) {
+	$scope.loginform = function(){
+
+		var username = $usernameProperties.getUser();
+		var password = $passwordProperties.getPassword();
+
+		if(username != null || password != null || username != {} || password != {} || username != "" || password != "") {
+			password = md5.createHash(password || '')
+			var method = 'POST';
+			var url = 'http://test.ohai-app.com/Credential/validate.php';
+			$scope.codeStatus = "";
+			var data = {
+			  username: username,
+			  hashpassword: password
+			};
+			$http({
+			  method: method,
+			  url: url,
+			  data: data,
+			  headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+			}).
+			success(function(response) {
+				if(response == "rejected"){
+					var failedPopup = $ionicPopup.alert({
+						title: 'ERROR',
+						template: 'Authentication failed'
+					});
+				}
+				else{
+					$ionicHistory.nextViewOptions({
+						disableBack: true
+					});
+
+					$state.go('menu.resources');
+					$scope.username = response[0].username;
+					$scope.email = response[0].email;
+					$scope.role = response[0].role;
+
+					console.log($scope.username);
+					console.log($scope.email);
+					console.log($scope.role);
+				}
+			}).
+			error(function(response) {
+				$scope.codeStatus = response || "Request failed";
+			});
+			
+		}
+		else {
+			var alertPopup = $ionicPopup.alert({
+				title: 'ERROR',
+				template: 'Field empty, please verify!'
+			});	
+		}
+	
+	}
+	$scope.loginusername = function(e) {
+		$usernameProperties.setUser(e);
+	}
+
+	$scope.loginpassword = function(e) {
+		$passwordProperties.setPassword(e);
+	}
+
+})
 
 .factory('Events', function($http) {
 

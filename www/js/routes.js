@@ -100,7 +100,15 @@ angular.module('app.routes', [])
     }
   })
   
-  
+    .state('menu.logout', {
+    url: '/logout',
+    views: {
+      'side-menu21': {
+        templateUrl: 'pages/logout.html',
+        controller: 'logoutCtrl'
+      }
+    }
+  })
 
   .state('menu', {
     url: '/kauhale',
@@ -117,7 +125,7 @@ angular.module('app.routes', [])
   
   
  
-$urlRouterProvider.otherwise('/kauhale/resources')
+$urlRouterProvider.otherwise('/kauhale/login')
   
 
 });

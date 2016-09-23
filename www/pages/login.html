@@ -1,17 +1,17 @@
-<ion-view title="Login" id="login">
+<ion-view title="Login" id="login" hide-nav-bar=true>
     <ion-content padding="true" class="has-header">
 
 
             <div class="list">
                           <label class="item item-input item-stacked-label">
                             <span class="input-label">Username</span>
-                            <input type="text" placeholder="John">
+                            <input type="text" placeholder="Username" ng-model="userloginname" ng-blur="loginusername(userloginname)">
                           </label>
                           <label class="item item-input item-stacked-label">
                             <span class="input-label">Password</span>
-                            <input type="password" placeholder="Suhr">
+                            <input type="password" placeholder="Password" ng-model="userloginpassword" ng-blur="loginpassword(userloginpassword)">
                           </label>
-                <button>Submit</button>
+                <button class="button button-block button-calm" ng-click="loginform()">Login</button>
             </div>
         
     </ion-content>
